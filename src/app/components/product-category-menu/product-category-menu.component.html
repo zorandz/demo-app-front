@@ -1,0 +1,13 @@
+  <div class="side-menu-container">
+    <ul class="side-menu-ul">
+      <li *ngFor="let productCategory of productCategories">
+          <a routerLink="category/{{ productCategory.id }}"
+          routerLinkActive="active-link"
+          (click)="onClick(productCategory.categoryName!)"
+          class="side-link">
+              <i class="fa fa-gift"></i>
+              <strong class="the-links"> {{ productCategory.categoryName                   }} </strong>
+          </a>
+      </li>  
+    </ul>
+  </div>

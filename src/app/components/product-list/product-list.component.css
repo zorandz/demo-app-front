@@ -1,0 +1,13 @@
+.category-info {
+    height: 70px;
+    font-size: 18px;
+    font-weight: 500;
+    width: 200px;
+    border: 3px solid black;
+    background-color: rgb(247, 216, 170);
+    z-index: 3;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    margin: auto;    
+}

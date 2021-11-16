@@ -1,0 +1,12 @@
+<form class="search-form">
+     <input 
+        type="text" 
+        #myInput 
+        class="bn30" 
+        placeholder="Search for products..."
+        (keyup.enter) = "doSearch(myInput.value)"
+        >
+    <button class="bn32" 
+          (click) = "doSearch(myInput.value)">Search</button>
+</form>
+  

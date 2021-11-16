@@ -1,0 +1,35 @@
+.active-link {
+    background-color: blueviolet;
+    color: white;
+    width: 100%;
+}
+
+.the-links {
+    width: 100%;
+}
+
+.side-menu-container {
+    width: 100%;
+}
+
+.side-menu-ul {
+    width: 100%;
+
+}
+.side-menu-ul li{
+    font-size: 1.8rem;
+    list-style: none;
+    text-decoration: none;
+    width: 100%;
+
+}
+
+.side-menu-ul li i {
+    margin-right: 1rem;
+}
+
+.side-menu-ul li a {
+    display: block;
+
+    width: 100%; 
+}
