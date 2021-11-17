@@ -1,0 +1,21 @@
+.details-container {
+    width: 90%;
+}
+
+.product-container {
+    width: 100%;
+    display: flex;
+}
+
+.detail-img {
+    width: 100%;
+    height: auto;
+}
+
+.the-rest {
+    margin-top: 3rem;
+}
+
+.description {
+    font-size: 1.5rem;
+}
