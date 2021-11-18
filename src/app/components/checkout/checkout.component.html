@@ -89,8 +89,8 @@
                                     </option>
                                 </select>
 
-                                <div *ngIf="shippingAddressCountry.invalid && (shippingAddressCountry.dirty || shippingAddressCountry.touched)" class="alert-danger mt-1">
-                                    <div *ngIf="shippingAddressCountry.errors.required">
+                                <div *ngIf="shippingAddressCountry!.invalid && (shippingAddressCountry!.dirty || shippingAddressCountry!.touched)" class="alert-danger mt-1">
+                                    <div *ngIf="shippingAddressCountry!.errors?.required">
                                         Country is required
                                     </div>
                                 </div>

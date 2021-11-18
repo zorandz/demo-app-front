@@ -13,6 +13,7 @@ export class User {
     public notLocked: boolean;
     public role: string;
     public authorities: [];
+    public orders: [];
   
     constructor() {
       this.userId = '';
@@ -28,5 +29,6 @@ export class User {
       this.notLocked = false;
       this.role = '';
       this.authorities = [];
+      this.orders = [];
     }
 }

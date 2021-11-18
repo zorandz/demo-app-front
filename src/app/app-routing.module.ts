@@ -9,7 +9,6 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
-import { LoginComponent } from './components/login/login.component';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
@@ -17,7 +16,6 @@ import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [ 
   // { path: 'order-history', component: OrderHistoryComponent },
-{ path: 'login', component: LoginComponent },
 { path: 'category/:id', component: ProductListComponent },
 { path: 'category', component: ProductListComponent },
 { path: 'products', component: ProductListComponent },
@@ -32,7 +30,6 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     SearchComponent,
-    LoginComponent,
     LoginStatusComponent,
     CartStatusComponent,
     ProductCategoryMenuComponent,
@@ -47,7 +44,6 @@ const routes: Routes = [
   ],
   exports: [RouterModule,  AppComponent,
     SearchComponent,
-    LoginComponent,
     LoginStatusComponent,
     CartStatusComponent,
     ProductCategoryMenuComponent,
