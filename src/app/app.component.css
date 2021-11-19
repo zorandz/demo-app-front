@@ -7,8 +7,28 @@ header {
     margin: 0 0 0 24.5%;
 }
 
+
+
 .search-input {
-    flex: 4 1 20rem;
+    flex: 3 1 20rem;
+}
+
+.login-button {
+    font-size: 2rem;
+    background-color:black;
+    border-radius: 4px 4px 4px 4px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    margin-right: 5rem;
+    color: white;
+}
+
+header div i {
+    margin-left: 1rem;
+}
+
+.login-button:hover {
+    text-decoration: none;
 }
 
 .main-section {

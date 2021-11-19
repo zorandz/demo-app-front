@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from 'src/app/user-management/components/login/login.component';
+import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { UserComponent } from '../components/user/user.component'
+import { AuthenticationGuard } from 'src/app/guard/authentication.guard';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [ 
-  // { path: 'order-history', component: OrderHistoryComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard] },
+ // { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 
@@ -19,12 +24,17 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot(routes)
   ],
   exports: [
     LoginComponent,
     RegisterComponent,
-    UserComponent
-  ]
+    UserComponent,
+    RouterModule
+  ],
+  providers: [ AuthenticationGuard ],
+
 })
 export class UserManagementModule { }

@@ -24,7 +24,8 @@ const routes: Routes = [
  { path: 'products/:id', component: ProductDetailsComponent},
  { path: 'search/:keyword', component: ProductListComponent },
  { path: '', redirectTo: '/products', pathMatch: 'full' },
- { path: '**', redirectTo: '/products', pathMatch: 'full' }];
+ //{ path: '**', redirectTo: '/products', pathMatch: 'full' }
+];
 
 @NgModule({
   declarations: [
