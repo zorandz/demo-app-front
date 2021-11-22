@@ -1,0 +1,34 @@
+
+.logout-button {
+    font-size: 2rem;
+    background-color:#17A2B8;
+    border-radius: 4px 4px 4px 4px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    margin-right: 5rem;
+    color: white;
+}
+
+
+.login-button {
+    font-size: 2rem;
+    background-color:#17A2B8;
+    border-radius: 4px 4px 4px 4px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    margin-right: 5rem;
+    color: white;
+}
+
+
+.login-status-container {
+    display: flex;
+}
+
+.login-status-container div i {
+    margin-left: 1rem;
+}
+
+.login-button:hover {
+    text-decoration: none;
+}

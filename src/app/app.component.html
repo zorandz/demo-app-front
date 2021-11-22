@@ -3,10 +3,7 @@
     <header>
         <app-search class="search-input"></app-search>
 
-        <div *ngIf="loggedIn == true" class="login-button">Welcome {{ userName }}<i class="fas fa-user"></i></div>
-        <div *ngIf="loggedIn == false">
-            <a routerLink="/login" class="login-button">Login</a>
-        </div>
+        <app-login-status></app-login-status>
 
         <app-cart-status class="cart-status"></app-cart-status>
     </header>

@@ -18,23 +18,29 @@ export class CartStatusComponent implements OnInit, OnDestroy {
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.updateCartStatus();
-  }
+      this.updateCartStatus();
+  } 
 
   updateCartStatus() {
 
     // subscribe to the cart totalPrice
 
     this.subscription1 = this.cartService.totalPrice.subscribe(
-      data => this.totalPrice = data
+      data => {
+        this.totalPrice = data
+      } 
     )
+      
+      this.subscription2 = this.cartService.totalQuantity.subscribe(
+        
+        data => {
+          this.totalQuantity = data
+        }
+      )
+    }
 
-    this.subscription2 = this.cartService.totalQuantity.subscribe(
-      data => this.totalQuantity = data
-    )
-  }
 
-  ngOnDestroy() {
+    ngOnDestroy() {
     this.subscription1.unsubscribe();
     this.subscription2.unsubscribe();
   }

@@ -7,6 +7,8 @@ import { RegisterComponent } from '../components/register/register.component';
 import { UserComponent } from '../components/user/user.component'
 import { AuthenticationGuard } from 'src/app/guard/authentication.guard';
 import { FormsModule } from '@angular/forms';
+import { NotificationModule } from 'src/app/notification.module';
+import { NotifierModule } from 'angular-notifier';
 
 const routes: Routes = [ 
   { path: 'register', component: RegisterComponent },

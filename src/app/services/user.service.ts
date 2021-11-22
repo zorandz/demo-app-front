@@ -49,7 +49,7 @@ export class UserService {
     return null;
   }
 
-  public createUserFormData(loggedInUsername: string, user: User, profileImage: File): FormData {
+  public createUserFormDate(loggedInUsername: string, user: User, profileImage: File): FormData {
     const formData = new FormData();
     formData.append('currentUsername', loggedInUsername);
     formData.append('firstName', user.firstName);

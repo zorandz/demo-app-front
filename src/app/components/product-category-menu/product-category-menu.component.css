@@ -4,12 +4,40 @@
     width: 100%;
 }
 
+.allround-container {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.features {
+    font-size: 1.6rem;
+    margin-left: 2.3rem;
+    background-color: black;
+    padding: 0.3rem 0 0 1rem;
+    height: 3rem;
+    border-radius: 5px 0 0 5px;
+
+}
+
+.users-i-actuator-container {
+    margin-top: 10rem;
+}
+
+.users {
+    
+}
+
+.actuator {
+    margin-top: 1rem;
+}
+
 .the-links {
     width: 100%;
 }
 
 .side-menu-container {
     width: 100%;
+    margin-top: 1rem;
 }
 
 .side-menu-ul {

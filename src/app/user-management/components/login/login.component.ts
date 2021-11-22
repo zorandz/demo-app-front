@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { NotificationService } from '../../../services/notification.service';
 import { User } from '../../../common/user';
 import { NotificationType } from '../../../common/enum/notification-type';
 import { HeaderType } from '../../../common/enum/header-type';
+import { Role } from 'src/app/common/enum/role';
 
 @Component({
   selector: 'app-login',
@@ -33,11 +34,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authService.login(user).subscribe(
         (response: HttpResponse<User>) => {
+          localStorage.setItem("firstName", response.body.firstName);
+          localStorage.setItem("user", JSON.stringify(response.body))
           const token = response.headers.get(HeaderType.JWT_TOKEN);
           this.authService.saveToken(token);
           this.authService.addUserToLocalCache(response.body);
-          this.router.navigateByUrl('/user/management');
+          this.router.navigateByUrl('/products');
           this.showLoading = false;
+          this.authService.isUserAuthorized.next(this.isAuthorized(response.body));
+          this.authService.isUserLogged.next(true);
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendErrorNotification(NotificationType.ERROR, errorResponse.error.message);
@@ -45,6 +50,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       )
     );
+  }
+
+  
+  private isAuthorized(user: User): boolean {
+    if (user.role == Role.ADMIN || user.role == Role.SUPER_ADMIN) {
+      return true;
+    } else {
+     return false;
+    }
   }
 
   private sendErrorNotification(notificationType: NotificationType, message: string): void {

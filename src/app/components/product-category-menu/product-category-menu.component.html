@@ -1,13 +1,29 @@
+<div class="allround-container">
   <div class="side-menu-container">
     <ul class="side-menu-ul">
       <li *ngFor="let productCategory of productCategories">
-          <a routerLink="category/{{ productCategory.id }}"
+        <a
+          routerLink="category/{{ productCategory.id }}"
           routerLinkActive="active-link"
           (click)="onClick(productCategory.categoryName!)"
-          class="side-link">
-              <i class="fa fa-gift"></i>
-              <strong class="the-links"> {{ productCategory.categoryName                   }} </strong>
-          </a>
-      </li>  
+          class="side-link"
+        >
+          <i class="fa fa-gift"></i>
+          <strong class="the-links">
+            {{ productCategory.categoryName }}
+          </strong>
+        </a>
+      </li>
     </ul>
   </div>
+
+  <div *ngIf="isHeAuthenticated && isHeAuthorized" class="users-i-actuator-container">
+    <div class="users features">
+      <a routerLink="/user/management">User Management</a>
+    </div>
+
+    <div class="actuator features">
+      <a routerLink="/actuator">Actuator</a>
+    </div>
+  </div>
+</div>

@@ -77,9 +77,6 @@ export class ProductListComponent implements OnInit {
                                               this.thePageSize,
                                               this.currentCategoryId)
                                               .subscribe(this.processResult());
-
-                                              console.log(`Id trenutne kategorije: ${this.currentCategoryId}, 
-    thePageNumber=${this.thePageNumber}`)
   }
 
   processResult() {

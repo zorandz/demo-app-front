@@ -79,7 +79,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public onAddNewUser(userForm: NgForm): void {
-    const formData = this.userService.createUserFormData(null, userForm.value, this.profileImage);
+    const formData = this.userService.createUserFormDate(null, userForm.value, this.profileImage);
     this.subscriptions.push(
       this.userService.addUser(formData).subscribe(
         (response: User) => {
@@ -91,6 +91,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.sendNotification(NotificationType.SUCCESS, `${response.firstName} ${response.lastName} added successfully`);
         },
         (errorResponse: HttpErrorResponse) => {
+          console.log(errorResponse);
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
           this.profileImage = null;
         }
@@ -99,7 +100,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public onUpdateUser(): void {
-    const formData = this.userService.createUserFormData(this.currentUsername, this.editUser, this.profileImage);
+    const formData = this.userService.createUserFormDate(this.currentUsername, this.editUser, this.profileImage);
     this.subscriptions.push(
       this.userService.updateUser(formData).subscribe(
         (response: User) => {
@@ -120,7 +121,7 @@ export class UserComponent implements OnInit, OnDestroy {
   public onUpdateCurrentUser(user: User): void {
     this.refreshing = true;
     this.currentUsername = this.authenticationService.getUserFromLocalCache().username;
-    const formData = this.userService.createUserFormData(this.currentUsername, user, this.profileImage);
+    const formData = this.userService.createUserFormDate(this.currentUsername, user, this.profileImage);
     this.subscriptions.push(
       this.userService.updateUser(formData).subscribe(
         (response: User) => {
