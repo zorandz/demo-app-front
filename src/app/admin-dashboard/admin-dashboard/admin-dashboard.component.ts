@@ -6,8 +6,6 @@ import { SystemCpu } from '../interfaces/system-cpu';
 import * as Chart from 'chart.js';
 import { ChartType } from '../../common/enum/chart-type';
 
-//declare type Chart = typeof import("chart.js");
-
 
 @Component({ selector: 'app-dashboard', 
 templateUrl: './admin-dashboard.component.html', 
@@ -33,12 +31,11 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    console.log(this.page);
     this.getTraces();
-  //  this.getSystemHealth();
-  //  this.getCpuUsage();
-  //  this.getProcessUpTime(true);
-    //this.getCurrentLocation();
+    this.getSystemHealth();
+    this.getCpuUsage();
+    this.getProcessUpTime(true);
+  //  this.getCurrentLocation();
   }
 
   public onSelectTrace(trace: any): void {
@@ -49,11 +46,10 @@ export class DashboardComponent implements OnInit {
   private getTraces() {
     this.dashboardService.getHttpTraces().subscribe(
       (response: any) => {
-        console.log(response)
         this.processTraces(response.traces);
- //       this.initializeBarChart();
- //       this.initializePieChart();
-        // this.traceList = response.traces;
+        this.initializeBarChart();
+        this.initializePieChart();
+       this.traceList = response.traces;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -62,7 +58,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private processTraces(traces: any) {
-    //this.traceList = traces;
+    this.traceList = traces;
     this.traceList = traces.filter((trace: any) => {
       return !trace.request.uri.includes('actuator');
     });
@@ -85,21 +81,23 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-/*
+
   private getSystemHealth() {
     this.dashboardService.getSystemHealth().subscribe(
       (response: SystemHealth) => {
         this.systemHealth = response;
-        this.systemHealth.details.diskSpace.details.free = this.formatBytes(this.systemHealth.details.diskSpace.details.free);
+        this.systemHealth.components.diskSpace.details.free
+        this.systemHealth.components.diskSpace.details.free = this.formatBytes(this.systemHealth.components.diskSpace.details.free);
       },
       (error: HttpErrorResponse) => {
         this.systemHealth = error.error;
-        this.systemHealth.details.diskSpace.details.free = this.formatBytes(this.systemHealth.details.diskSpace.details.free);
-        // console.log(error);
-        // alert(error.message);
+        this.systemHealth.components.diskSpace.details.free = this.formatBytes(this.systemHealth.components.diskSpace.details.free);
+         alert(error.message);
       }
     );
   }
+
+  
 
   private getCpuUsage() {
     this.dashboardService.getSystemCpu().subscribe(
@@ -112,6 +110,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  
   public onRefreshData(): void {
     this.http200Traces = [];
     this.http400Traces = [];
@@ -127,7 +126,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getProcessUptime().subscribe(
       (response: any) => {
         this.timestamp = Math.round(response.measurements[0].value);
-        this.processUpTime = this.formateUptime(this.timestamp);
+        this.processUpTime = this.formatUptime(this.timestamp);
         if (isUpdateTime) {
           this.updateTime();
         }
@@ -152,16 +151,15 @@ export class DashboardComponent implements OnInit {
 
   private updateTime(): void {
     setInterval(() => {
-      this.processUpTime = this.formateUptime(this.timestamp + 1);
+      this.processUpTime = this.formatUptime(this.timestamp + 1);
       this.timestamp++;
     }, 1000);
   }
 
-  
 
   private initializeBarChart(): Chart {
     const element = document.getElementById('barChart');
-    return new Chart(element, {
+    return new Chart(<HTMLCanvasElement>element, {
       type: ChartType.BAR,
       data: {
           labels: ['200', '404', '400', '500'],
@@ -182,12 +180,14 @@ export class DashboardComponent implements OnInit {
               }]
           }
       }
+      
   });
+  
   }
 
   private initializePieChart(): Chart {
     const element = document.getElementById('pieChart');
-    return new Chart(element, {
+    return new Chart(<HTMLCanvasElement>element, {
       type: ChartType.PIE,
       data: {
           labels: ['200', '404', '400', '500'],
@@ -200,12 +200,12 @@ export class DashboardComponent implements OnInit {
       options: {
         title: { display: true, text: [`Last 100 Requests as of ${this.formatDate(new Date())}`] },
         legend: { display: true },
-        display: true
+     //   display: true
       }
   });
   }
 
-  private formateUptime(timestamp: number): string {
+  private formatUptime(timestamp: number): string {
     const hours = Math.floor(timestamp / 60 / 60);
     const minutes = Math.floor(timestamp / 60) - (hours * 60);
     const seconds = timestamp % 60;
@@ -213,7 +213,7 @@ export class DashboardComponent implements OnInit {
     minutes.toString().padStart(2, '0') + 'm' + seconds.toString().padStart(2, '0') + 's';
   }
 
-  private formatBytes(bytes): string {
+  private formatBytes(bytes: any): string {
     if (bytes === 0) {
        return '0 Bytes';
       }
@@ -237,13 +237,13 @@ export class DashboardComponent implements OnInit {
     return `${mm}/${dd}/${year}`;
   }
 
-  // private getCurrentLocation() {
-  //   const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
-  //   navigator.geolocation.getCurrentPosition((position) => {
-  //     console.log(position);
-  //   });
-  // }
+   private getCurrentLocation() {
+     const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
+     navigator.geolocation.getCurrentPosition((position) => {
+       console.log(position);
+     });
+   }
 
-  */
+  
 
 }

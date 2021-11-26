@@ -1,5 +1,5 @@
 <div class="allround-container">
-  <div class="side-menu-container">
+  <div class="product-categories-container">
     <ul class="side-menu-ul">
       <li *ngFor="let productCategory of productCategories">
         <a
@@ -19,11 +19,11 @@
 
   <div *ngIf="isHeAuthenticated && isHeAuthorized" class="users-i-actuator-container">
     <div class="users features">
-      <a routerLink="/user/management">User Management</a>
+      <a routerLinkActive="active-link" routerLink="/user/management" class="features-anchor">User Management</a>
     </div>
 
     <div class="actuator features">
-      <a routerLink="/actuator">Actuator</a>
+      <a routerLinkActive="active-link" routerLink="/actuator" class="features-anchor">Actuator</a>
     </div>
   </div>
 </div>

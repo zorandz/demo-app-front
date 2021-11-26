@@ -11,11 +11,13 @@
           <a routerLink="/products/{{ tempProduct.id }}">
             <h1>{{ tempProduct.name }}</h1>
           </a>
-
-          <div class="price">{{ tempProduct.unitPrice | currency: "USD" }}</div>
-          <button (click)="addToCart(tempProduct)" class="btn-primary btn-sm">
-            Add to cart
-          </button>
+          <div class="price-and-button">
+            <div class="price">{{ tempProduct.unitPrice | currency: "USD" }}</div>
+            <button (click)="addToCart(tempProduct)" class="addToCart-button">
+              Add to cart
+            </button>
+          </div>
+        
           <p>{{ tempProduct.category }}</p>
         </div>
       </div>

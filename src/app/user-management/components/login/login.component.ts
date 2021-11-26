@@ -53,11 +53,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   
-  private isAuthorized(user: User): boolean {
+  public isAuthorized(user: User): boolean {
     if (user.role == Role.ADMIN || user.role == Role.SUPER_ADMIN) {
       return true;
     } else {
      return false;
+    }
+  }
+
+  private isAuthorizedString(user: User): string {
+    if (this.isAuthorized(user)) {
+      return "true";
+    } else {
+      return "false";
     }
   }
 

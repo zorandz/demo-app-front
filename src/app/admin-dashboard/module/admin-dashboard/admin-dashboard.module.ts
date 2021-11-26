@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from '../../admin-dashboard/admin-dashboard.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -9,11 +10,14 @@ import { DashboardComponent } from '../../admin-dashboard/admin-dashboard.compon
     DashboardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NgxPaginationModule
+
   ],
   exports: [
     DashboardComponent,
-    CommonModule
+    CommonModule,
+    NgxPaginationModule
   ]
 })
 export class AdminDashboardModule { }

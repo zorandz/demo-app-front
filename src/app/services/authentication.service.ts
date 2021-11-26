@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../common/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Role } from '../common/enum/role';
 
 
 @Injectable({providedIn: 'root'})
@@ -57,6 +58,14 @@ export class AuthenticationService {
 
   public getToken(): string {
     return this.token;
+  }
+
+  public isAuthorized(user: User): boolean {
+    if (user.role == Role.ADMIN || user.role == Role.SUPER_ADMIN) {
+      return true;
+    } else {
+     return false;
+    }
   }
 
   public isUserLoggedIn(): boolean {

@@ -13,7 +13,7 @@ import { NotifierModule } from 'angular-notifier';
 const routes: Routes = [ 
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard] },
+  { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard]},
  // { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
@@ -22,7 +22,7 @@ const routes: Routes = [
   declarations: [
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +34,7 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    RouterModule
+    RouterModule,
   ],
   providers: [ AuthenticationGuard ],
 

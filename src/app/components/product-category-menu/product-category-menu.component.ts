@@ -34,13 +34,15 @@ export class ProductCategoryMenuComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.listProductCategories();
-    if (this.authService.isUserLoggedIn()) {
-      if (localStorage.getItem(JSON.parse("user").role) == Role.ADMIN || localStorage.getItem(JSON.parse("user").role) == Role.SUPER_ADMIN) {
-        this.isHeAuthorized = true;
-        this.isHeAuthenticated = true;
-      }
-    }
+    this.isLogged();
+  }
 
+  parseBoolean(localStorage: string): boolean {
+    if (localStorage == "true") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   onClick(category: string) {
@@ -54,6 +56,15 @@ export class ProductCategoryMenuComponent implements OnInit, OnDestroy {
       }
     )
   }
+
+  isLogged() {
+    if (this.authService.isUserLoggedIn() && this.authService.isAuthorized(JSON.parse(localStorage.getItem('user')))){
+      this.isHeAuthenticated = true;
+      this.isHeAuthorized = true;
+    }
+  }
+
+
 /*
   isAdmin() {
     let user = new User();

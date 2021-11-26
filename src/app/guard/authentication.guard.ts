@@ -20,12 +20,7 @@ export class AuthenticationGuard implements CanActivate {
     if (!this.authenticationService.isUserLoggedIn) {
       return false;
     }
-
-    if (localStorage.getItem(JSON.parse("user").role) != Role.SUPER_ADMIN) {
-      this.notificationService.notify(NotificationType.ERROR, `Unauthorized to access this page.`);
-      return false;
-    }
-
+    
     if (this.authenticationService.isUserLoggedIn()) {
       return true;
     }

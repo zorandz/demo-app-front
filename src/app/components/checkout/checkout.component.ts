@@ -174,8 +174,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("Handling the submit button");
-
     if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
       return;

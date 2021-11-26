@@ -5,48 +5,17 @@
     font-size: 1.8rem;
     -webkit-transform: translate(0);
     transform: translate(0);
-    background-image: linear-gradient(45deg, #b06ab3, #4568dc);
-    padding: 0.7rem 1rem;
-    border-radius: 10px 0 0 10px;
+    padding: 0.7rem 2rem;
     box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
     -webkit-transition: box-shadow 0.25s;
     transition: box-shadow 0.25s;
-    color: white;
+    color: black;
+    clip-path: polygon(0 0, 96.5% 0, 100% 100%, 3.5% 100%);
   }
 
   .bn30::placeholder {
-      color: white;
+      color: gray;
       opacity: 0.3;
-  }
-
-
-  
-  .bn30 .text {
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(45deg, #4568dc, #b06ab3);
-  }
-  
-  .bn30:after {
-    content: "";
-    border-radius: 18px;
-    position: absolute;
-    margin: 4px;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
-    background: #0e0e10;
-  }
-  
-  .bn30:hover {
-    background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
-    box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
-  }
-  
-  .bn30:hover .text {
-    background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
   }
 
   .search-form {
@@ -54,25 +23,20 @@
       margin-left: 3rem;
   }
 
-  .button-search {
-      min-width: 7rem;
-      min-height: 3rem;
-  }
-
   .bn32 {
     border: 1rem;
     cursor: pointer;
     outline: none;
     font-size: 16px;
-    -webkit-transform: translate(0);
     transform: translate(0);
-    background-image: linear-gradient(45deg, #4568dc, #b06ab3);
     padding: 0.7em 2em;
-    border-radius: 0px 10px 10px 0;
-    box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
-    -webkit-transition: box-shadow 0.25s;
-    transition: box-shadow 0.25s;
+    background-color: rgb(63, 63, 11);
     color: white;
+    clip-path: polygon(0 0, 93% 0%, 100% 100%, 6.5% 100%);
+  }
+
+  .b32:hover {
+    background-color: yellow;
   }
   
   

@@ -22,14 +22,14 @@ const routes: Routes = [
 @NgModule({
   declarations: [    
   
-    CheckoutComponent, ProductDetailsComponent, CartDetailsComponent
+    CheckoutComponent, ProductDetailsComponent, CartDetailsComponent,
   ],
   imports: [
     AppRoutingModule,
     UserManagementModule,
     BrowserModule,
     NotificationModule,
-    AdminDashboardModule
+    AdminDashboardModule,
   ],
   providers: [ AuthenticationGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

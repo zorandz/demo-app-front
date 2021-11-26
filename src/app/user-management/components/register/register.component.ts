@@ -20,9 +20,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
               private notificationService: NotificationService) {}
 
   ngOnInit(): void {
-    if (this.authService.isUserLoggedIn()) {
-      this.router.navigateByUrl('/user/management');
-    }
   }
 
   public onRegister(user: User): void {

@@ -1,20 +1,30 @@
 export interface SystemHealth {
     status: string;
-    details: {
+    components: {
+      databaseService: {
+        status: string,
+        details: {
+          databaseService: string,
+        }
+      },
       db: {
         status: string,
         details: {
-          database: string,
-          hello: number
+          database: number,
+          validationQuery: string,
         }
-      },
+      }
       diskSpace: {
         status: string,
         details: {
-          total: number,
-          free: number | string,
-          threshold: number
+          total: string,
+          free: string,
+          threshold: number,
+          exists: true
         }
+      }
+      ping: {
+        status: string
       }
     };
 
