@@ -1,0 +1,15 @@
+.category-select {
+    width: 16rem;
+    height: 3rem;
+    margin: 1rem 0;
+    width: 25rem;
+}
+
+.form-control {
+    width: 25rem !important;
+}
+
+.selecting-active {
+    width: 25rem;
+    height: 2rem;
+}

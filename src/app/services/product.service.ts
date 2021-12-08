@@ -5,6 +5,7 @@ import { Product } from '../common/product';
 import { map } from 'rxjs/operators';
 import { ProductCategory } from '../common/product-category';
 import { environment } from 'src/environments/environment';
+import { CustomHttpResponse } from '../common/custom-http-response';
 
 @Injectable({
   providedIn: 'root',
@@ -64,7 +65,31 @@ export class ProductService {
   getProduct(theId: number): Observable<Product> {
     return this.httpClient.get<Product>(`${this.baseUrl}/${theId}`);
   }
+
+  addProduct(formData: FormData) {
+    return this.httpClient.post<Product>(`${this.baseUrl}/add-product/`, formData);
+  }
+
+  createNewProduct(product: Product, active: boolean, categoryName: string): FormData {
+    const formData = new FormData();
+    formData.append("categoryId", product.categoryId.toString());
+    formData.append("categoryName", categoryName);
+    formData.append("sku", product.sku);
+    formData.append("name", product.name);
+    formData.append("description", product.description);
+    formData.append("unitPrice", product.unitPrice.toString());
+    formData.append("imageUrl", product.imageUrl);
+    formData.append("active", JSON.stringify(active));
+    formData.append("unitsInStock", product.unitsInStock.toString());
+    return formData;
+  }
+
+  delete(id: number): Observable<CustomHttpResponse> {
+    return this.httpClient.delete<CustomHttpResponse>(`${this.baseUrl}/delete/${id}`)  
+  }
 }
+
+
 
 interface SearchByNameResponse {
   _embedded: {

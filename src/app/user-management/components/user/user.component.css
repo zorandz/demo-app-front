@@ -1,4 +1,75 @@
+.orders-container {
+    display: flex;
+    flex-flow: column;
+}
+
+.order-item {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid gray;
+    margin: 0.5rem 0 1rem 0;
+    text-align: center;
+}
+
+.order-item span:not(:first-child) {
+    margin-left: 1rem;
+}
+
+.order-item span:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.order-item span {
+    margin-bottom: 2rem;
+}
+
+.order-product-img  {
+    width: 10%;
+    height: 100%;
+}
+
+.order-products {
+    display: flex;
+    border-bottom: 1px dotted yellow;
+
+}
+
 .slika {
     max-height: 50px;
     width: auto;
+}
+
+.menu-items {
+    display: flex;
+    margin-top: -0.9rem;
+}
+
+.menu-item-users {
+    color: yellow;
+    text-decoration: none;
+}
+
+nav a:not(:first-child) {
+    margin-left: 2rem;
+}
+
+.nav-item {
+    color: yellow;
+}
+
+.menu-items:nth-child(0) {
+    margin-left: 10rem;
+}
+
+.fix-position {
+    margin-right: 2rem;
+}
+
+.search-input {
+    padding: 1.4rem !important;
+    outline-color: yellow;
+}
+
+.search-input:focus {
+    outline:none;
 }

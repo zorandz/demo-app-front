@@ -4,12 +4,13 @@
 
       <div *ngFor="let tempProduct of products" class="product">
         <div class="product-box">
+          <button class="delete-btn" (click)="onDelete(tempProduct.id)">Delete</button>
           <a routerLink="/products/{{ tempProduct.id }}">
             <img src="{{ tempProduct.imageUrl }}" class="img-product" />
           </a>
 
-          <a routerLink="/products/{{ tempProduct.id }}">
-            <h1>{{ tempProduct.name }}</h1>
+          <a routerLink="/products/{{ tempProduct.id }}" class="product-name">
+            <p>{{ tempProduct.name }}</p>
           </a>
           <div class="price-and-button">
             <div class="price">{{ tempProduct.unitPrice | currency: "USD" }}</div>
@@ -18,7 +19,7 @@
             </button>
           </div>
         
-          <p>{{ tempProduct.category }}</p>
+          <p>{{ tempProduct.categoryId }}</p>
         </div>
       </div>
 

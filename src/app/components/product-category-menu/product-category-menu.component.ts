@@ -53,6 +53,7 @@ export class ProductCategoryMenuComponent implements OnInit, OnDestroy {
     this.productService.getProductCategories().subscribe(
       (data: any[] | undefined) => {
         this.productCategories = data;
+
       }
     )
   }

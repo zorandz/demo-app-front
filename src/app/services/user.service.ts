@@ -4,12 +4,17 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { User } from '../common/user';
 import { CustomHttpResponse } from '../common/custom-http-response';
+import { Orders } from '../common/orders';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
   private host = environment.ApiUrl;
 
   constructor(private http: HttpClient) {}
+
+  public getOrders(username: string): Observable<Orders[]> {
+    return this.http.get<Orders[]>(`${this.host}/user/orders/${username}`);
+  }
 
   public getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.host}/user/list`);
@@ -58,7 +63,7 @@ export class UserService {
     formData.append('email', user.email);
     formData.append('role', user.role);
     formData.append('profileImage', profileImage);
-    formData.append('isActive', JSON.stringify(user.active));
+    formData.append('isActive', JSON.stringify(user.isActive));
     formData.append('isNonLocked', JSON.stringify(user.notLocked));
     return formData;
   }

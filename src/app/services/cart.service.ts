@@ -7,7 +7,7 @@ import { CartItem } from '../common/cart-item';
 })
 export class CartService {
 
-  cartItems: CartItem[] = [];
+  cartItems: CartItem[];
 
   totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -22,10 +22,14 @@ export class CartService {
 
       this.computeCartTotals();
     }*/
+
+    this.cartItems = JSON.parse(sessionStorage.getItem('cartItems')) != null ? JSON.parse(sessionStorage.getItem('cartItems')):[];
+
   }
 
   addToCart(theCartItem: CartItem) {
     //check if we already have this item in cart
+    
     let alreadyExistsInCart: boolean = false;
     let existingCartItem: CartItem = undefined!;
 
@@ -49,6 +53,7 @@ export class CartService {
 
     // compute cart total price and total quantity
     this.computeCartTotals();
+
   }
 
   //compute cart total price and total quantity.
@@ -103,6 +108,10 @@ export class CartService {
     }
 
     this.computeCartTotals();
+  }
+
+  persistPrice() {
+    this.storage.setItem('cartPrice', JSON.stringify(this.totalPrice)); 
   }
 
   persistCartItems() {

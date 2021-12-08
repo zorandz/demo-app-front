@@ -1,6 +1,6 @@
 <div class="cart-status-container">
     <a routerLink="/cart-details">
-      <div class="total">{{ totalPrice | currency: 'USD' }} 
+      <div class="total" (change)="onPriceChange()">{{ totalPrice | currency: 'USD' }} 
   <!--      <span>{{ totalQuantity }}</span> -->
       </div>
       <i class="fa fa-shopping-cart total" aria-hidden="true"></i>

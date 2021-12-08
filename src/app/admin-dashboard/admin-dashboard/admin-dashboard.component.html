@@ -1,12 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d3dedf;">
-    <a class="navbar-brand" href="#">System Monitoring Dashboard</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<div class="actuator-container">
+  <nav class=" my-navbar" style="background-color: #d3dedf;">
+    <p class="title">System Monitoring Dashboard</p>
+    
   
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+    <div class="system-info-items" id="nav">
+      <ul class="">
+        <li class="">
           <span [ngClass]="{'text-danger': systemHealth?.status !=='UP'}"><i class="fa fa-server"></i> System: {{systemHealth?.status}}</span>&nbsp;&nbsp;
           <span [ngClass]="{'text-danger': systemHealth?.components.db.status !=='UP'}"><i class="fa fa-database"></i> DB: {{systemHealth?.components.db.details.database}} - {{systemHealth?.components.db.status}}</span>&nbsp;
           <span [ngClass]="{'text-danger': !systemHealth?.components.diskSpace.details.free}"><i class="fa fa-hdd-o"></i> Disk Space: {{systemHealth?.components.diskSpace.details.free}}</span>&nbsp;&nbsp;
@@ -14,60 +13,61 @@
           <span><i class="fa fa-clock-o"></i> Up Time: {{processUpTime}}</span>
         </li>
       </ul>
-      <div class="form-inline my-2 my-lg-0">
-        <button (click)="onRefreshData()" class="btn btn-success my-2 my-sm-0">
-        Refresh Data
-        </button>
-      </div>
     </div>
-  </nav>
+    <div class="refresh-btn">
+      <button (click)="onRefreshData()" class="addToCart-button refresh-btn">
+      Refresh Data
+      </button>
+    </div>
+</nav>
   
-  <div class="container">
-    <div class="row" style="margin-top: 10px;">
-      <div class="col-md-4 col-xl-3">
-          <div class="card bg-c-green order-card">
-              <div class="card-block">
-                <i class="fa fa-check-circle-o f-left" style="margin-right: 5px;"></i>&nbsp;
-                  <h6 class="m-b-20" style="margin-top: -20px;">200 Response</h6>
-                  <h2 class="text-right" style="margin-top: -40px;"><span>{{http200Traces?.length}}</span></h2>
-                  <p class="m-b-0">Updated:<span *ngIf="http200Traces?.length > 0" class="f-right">{{http200Traces[0]?.timestamp | date:'short'}}</span></p>
+  <div class="http-response-container">
+    <div class="row">
+          <div class="response-card">
+              <div class="response-info-container">
+                <i class="fa fa-check-circle-o response-icon"></i>
+                <h6 class="response">200 Response</h6>
+                <h2 class="response-number"><span>{{http200Traces?.length}}</span></h2>
+              </div>
+              <div class="last-updated-container">
+                <p class="">Updated:<span *ngIf="http200Traces?.length > 0" class="f-right">{{http200Traces[0]?.timestamp | date:'short'}}</span></p>
               </div>
           </div>
-      </div>
-  
-      <div class="col-md-4 col-xl-3">
-          <div class="card bg-c-blue order-card">
-              <div class="card-block">
-                <i class="fa fa-ban f-left" style="margin-right: 5px;"></i>&nbsp;
-                  <h6 class="m-b-20" style="margin-top: -20px;">404 Response</h6>
-                  <h2 class="text-right" style="margin-top: -40px;"><span>{{http404Traces?.length}}</span></h2>
-                  <p class="m-b-0">Updated:<span *ngIf="http404Traces?.length > 0" class="f-right">{{http404Traces[0]?.timestamp | date:'short'}}</span></p>
-              </div>
+
+          <div class="response-card">
+            <div class="response-info-container">
+              <i class="fa fa-ban response-icon"></i>
+              <h6 class="response">404 Response</h6>
+              <h2 class="response-number-blue"><span>{{http404Traces?.length}}</span></h2>
+            </div>
+            <div class="last-updated-container">
+              <p class="">Updated:<span *ngIf="http404Traces?.length > 0" class="f-right">{{http404Traces[0]?.timestamp | date:'short'}}</span></p>
+            </div>
+        </div>
+
+        <div class="response-card">
+          <div class="response-info-container">
+            <i class="fa fa-exclamation-circle response-icon"></i>
+            <h6 class="response">400 Response</h6>
+            <h2 class="response-number-orange"><span>{{http400Traces?.length}}</span></h2>
+          </div>
+          <div class="last-updated-container">
+            <p class="">Updated:<span *ngIf="http400Traces?.length > 0" class="f-right">{{http400Traces[0]?.timestamp | date:'short'}}</span></p>
           </div>
       </div>
-  
-      <div class="col-md-4 col-xl-3">
-          <div class="card bg-c-yellow order-card">
-              <div class="card-block">
-                <i class="fa fa-exclamation-circle f-left" style="margin-right: 5px;"></i>&nbsp;
-                  <h6 class="m-b-20" style="margin-top: -20px;">400 Response</h6>
-                  <h2 class="text-right" style="margin-top: -40px;"><span>{{http400Traces?.length}}</span></h2>
-                  <p class="m-b-0">Updated:<span *ngIf="http400Traces?.length > 0" class="f-right">{{http400Traces[0]?.timestamp | date:'short'}}</span></p>
-              </div>
-          </div>
-      </div>
-  
-      <div class="col-md-4 col-xl-3">
-          <div class="card bg-c-pink order-card">
-              <div class="card-block">
-                <i class="fa fa-bug f-left" style="margin-right: 5px;"></i>&nbsp;
-                  <h6 class="m-b-20" style="margin-top: -20px;">500 Response</h6>
-                  <h2 class="text-right" style="margin-top: -40px;"><span>{{http500Traces?.length}}</span></h2>
-                  <p class="m-b-0">Updated:<span *ngIf="http500Traces?.length > 0" class="f-right">{{http500Traces[0]?.timestamp | date:'short'}}</span></p>
-              </div>
-          </div>
-      </div>
-  
+
+      <div class="response-card">
+        <div class="response-info-container">
+          <i class="fa fa-bug response-icon"></i>
+          <h6 class="response">500 Response</h6>
+          <h2 class="response-number-red"><span>{{http500Traces?.length}}</span></h2>
+        </div>
+        <div class="last-updated-container">
+          <p class="">Updated:<span *ngIf="http500Traces?.length > 0" class="f-right">{{http500Traces[0]?.timestamp | date:'short'}}</span></p>
+        </div>
+    </div>
+
+    <div class="canvas-container">
       <div class="col-sm-6 col-md-6 col-lg-6"> HTTP RESPONSE
         <canvas id="barChart" style="display: block;"></canvas>
       </div>
@@ -76,12 +76,15 @@
         <canvas id="pieChart" style="display: block;">
         </canvas>
      </div>
+    </div>
+  
+     
   
      <hr>
   
      <div class="col-sm-6 col-md-6 col-lg-12" style="margin-top: 50px;">
       <h5 class="pull-left">HTTP Traces</h5>
-      <button type="button" (click)="exportTableToExcel()" class="btn btn-primary btn-sm pull-right" style="margin-bottom: 10px;"> -->
+      <button type="button" (click)="exportTableToExcel()" class="addToCart-button pull-right" style="margin-bottom: 10px;"> -->
         <i class="fa fa-external-link" aria-hidden="true"></i>
         export to Excel</button>
       <table class="table table-hover text-center" id="httptrace-table">
@@ -112,20 +115,19 @@
             </td>
             <td (click)="onSelectTrace(trace)">{{trace?.request.uri}}</td>
             <td>
-              <button (click)="onSelectTrace(trace)" class="btn btn-outline-info"><i class="fa fa-eye"></i></button>
+              <button (click)="onSelectTrace(trace)" style="height: 2.7" class="btn btn-outline-info addToCart-button"><i class="fa fa-eye"></i></button>
             </td>
           </tr>
         </tbody>
       </table>
     
-      <pagination-controls class="text-center" id="trace-list" (pageChange)="page = $event"
+      <pagination-controls class="text-center color-pagi" id="trace-list" (pageChange)="page = $event"
       ></pagination-controls>
 
       <!--
       <pagination-controls class="text-center" id="trace-list" (pageChange)="page = $event" maxSize="10"
       directionLinks="true"></pagination-controls> 
       -->
-  
    </div>
   </div>
   
@@ -212,5 +214,6 @@
       </div>
     </div>
   </div>
+</div>
   
   

@@ -28,9 +28,12 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/myStyles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/scripts/myScript.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -95,7 +98,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/myStyles.css"
             ],
             "scripts": []
           }

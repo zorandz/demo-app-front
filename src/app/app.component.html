@@ -1,6 +1,6 @@
 <section class="header-section">
 
-    <header>
+    <header *ngIf="router.url != '/portfolio'">
         <app-search class="search-input"></app-search>
 
         <app-login-status></app-login-status>
@@ -10,7 +10,7 @@
 
 </section>
 
-<section class="main-section">
+<section  *ngIf="router.url != '/portfolio'" class="main-section">
 
     <div class="main-section-container">
 
@@ -25,8 +25,18 @@
         </div>
 
     </div>
+</section>
+
+<section *ngIf="router.url == '/portfolio'" class="main-section-portfolio">
+
+    <div class="portfolio-container main-section-container">
+        <router-outlet></router-outlet>
+    </div>
 
 </section>
+
+
+
 
 
 

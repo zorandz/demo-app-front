@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductDetailsComponent implements OnInit {
 
   private theProductId?: string | null | number;
-  product: Product = new Product();
+  product: Product;
 
   constructor(private route: ActivatedRoute,
               private productService: ProductService,

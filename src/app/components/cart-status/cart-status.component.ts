@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CartItem } from 'src/app/common/cart-item';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -14,17 +15,23 @@ export class CartStatusComponent implements OnInit, OnDestroy {
 
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
+  storage: Storage = sessionStorage;
 
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
       this.updateCartStatus();
+  //    this.totalPrice = JSON.parse(this.storage.getItem('totalPrice'))
   } 
+
+  onPriceChange() {
+    this.storage.setItem("totalPrice", JSON.stringify(this.totalPrice));
+
+  }
 
   updateCartStatus() {
 
     // subscribe to the cart totalPrice
-
     this.subscription1 = this.cartService.totalPrice.subscribe(
       data => {
         this.totalPrice = data
@@ -35,8 +42,13 @@ export class CartStatusComponent implements OnInit, OnDestroy {
         
         data => {
           this.totalQuantity = data
+          this.storage.setItem("totalQuantity", JSON.stringify(this.totalQuantity));
         }
       )
+    }
+
+    uponRefreshLoadPrice() {
+      
     }
 
 

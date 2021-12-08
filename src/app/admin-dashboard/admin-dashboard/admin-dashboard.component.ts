@@ -164,8 +164,8 @@ export class DashboardComponent implements OnInit {
       data: {
           labels: ['200', '404', '400', '500'],
           datasets: [{data: [this.http200Traces.length, this.http404Traces.length, this.http400Traces.length, this.http500Traces.length],
-              backgroundColor: ['rgb(40,167,69)', 'rgb(0,123,255)', 'rgb(253,126,20)', 'rgb(220,53,69)'],
-              borderColor: ['rgb(40,167,69)', 'rgb(0,123,255)', 'rgb(253,126,20)', 'rgb(220,53,69)'],
+              backgroundColor: ['rgb(233,227,195)', 'rgb(148,131,155)', 'rgb(198,145,145)', 'rgb(220,53,69)'],
+              borderColor: ['rgb(0,0,0)', 'rgb(0,0,0)', 'rgb(0,0,0)', 'rgb(0,0,0)'],
               borderWidth: 3
           }]
       },
@@ -192,8 +192,8 @@ export class DashboardComponent implements OnInit {
       data: {
           labels: ['200', '404', '400', '500'],
           datasets: [{data: [this.http200Traces.length, this.http404Traces.length, this.http400Traces.length, this.http500Traces.length],
-            backgroundColor: ['rgb(40,167,69)', 'rgb(0,123,255)', 'rgb(253,126,20)', 'rgb(220,53,69)'],
-            borderColor: ['rgb(40,167,69)', 'rgb(0,123,255)', 'rgb(253,126,20)', 'rgb(220,53,69)'],
+            backgroundColor: ['rgb(233,227,195)', 'rgb(148,131,155)', 'rgb(198,145,145)', 'rgb(220,53,69)'],
+            borderColor: ['rgb(233,227,195)', 'rgb(148,131,155)', 'rgb(198,145,145)', 'rgb(220,53,69)'],
             borderWidth: 3
           }]
       },

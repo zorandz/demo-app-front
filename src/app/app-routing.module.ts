@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './admin-dashboard/admin-dashboard/admin-dashboard.component';
 import { AppComponent } from './app.component';
+import { AddProductComponent } from './components/add-product/add-product.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
  { path: 'search/:keyword', component: ProductListComponent },
  { path: 'actuator', component: DashboardComponent},
  { path: '', redirectTo: '/products', pathMatch: 'full' },
+ { path: 'add-product-form', component: AddProductComponent }
  //{ path: '**', redirectTo: '/products', pathMatch: 'full' }
 ];
 
@@ -38,7 +40,8 @@ const routes: Routes = [
     CartStatusComponent,
     ProductCategoryMenuComponent,
     ProductListComponent,
-    LoginStatusComponent
+    LoginStatusComponent,
+    AddProductComponent
   ],
   imports: [
     RouterModule.forRoot(routes), 
@@ -46,7 +49,8 @@ const routes: Routes = [
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NotificationModule
+    NotificationModule,
+    FormsModule
   ],
   exports: [RouterModule,  AppComponent,
     SearchComponent,
@@ -55,11 +59,13 @@ const routes: Routes = [
     ProductCategoryMenuComponent,
     ProductListComponent,
     LoginStatusComponent,
+    AddProductComponent,
     CommonModule,
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NotificationModule
+    NotificationModule,
+    FormsModule
   ]
 })
 export class AppRoutingModule { }

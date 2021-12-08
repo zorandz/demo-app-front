@@ -9,11 +9,13 @@ import { AuthenticationGuard } from 'src/app/guard/authentication.guard';
 import { FormsModule } from '@angular/forms';
 import { NotificationModule } from 'src/app/notification.module';
 import { NotifierModule } from 'angular-notifier';
+import { PortfolioComponent } from '../components/portfolio/portfolio.component';
 
 const routes: Routes = [ 
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard]},
+  { path: 'portfolio', component: PortfolioComponent }
  // { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
@@ -23,6 +25,7 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     UserComponent,
+    PortfolioComponent,
   ],
   imports: [
     CommonModule,

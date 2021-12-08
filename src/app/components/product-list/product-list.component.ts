@@ -45,6 +45,17 @@ export class ProductListComponent implements OnInit {
 
   }
 
+  onDelete(id: number) {
+    this.productService.delete(id).subscribe(
+      response => {
+        console.log(response);
+      },
+      errorRes => {
+        console.log(errorRes);
+      }
+    )
+  }
+
   listProducts() {   
     this.searchMode = this.route.snapshot.paramMap.has("keyword");
 

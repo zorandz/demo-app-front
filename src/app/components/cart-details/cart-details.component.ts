@@ -17,20 +17,20 @@ export class CartDetailsComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   subscription2!: Subscription;
 
-  constructor(private cartService: CartService) { }
+  storage: Storage = sessionStorage;
+
+  constructor(private cartService: CartService) { 
+  }
 
   ngOnInit(): void {
     this.listCartDetails();
-
-    if (this.cartItems == null) {
-    }
   }
 
   listCartDetails() {
 
     //get a handle to the cart items
     this.cartItems = this.cartService.cartItems;
-    localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+    this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
 
     //subscribe to the cart totalPrice
     this.subscription = this.cartService.totalPrice.subscribe(
@@ -41,8 +41,8 @@ export class CartDetailsComponent implements OnInit, OnDestroy {
       this.subscription2 = this.cartService.totalQuantity.subscribe(
         data => this.totalQuantity = data
         )
-        localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
-        localStorage.setItem('totalQuantity', JSON.stringify(this.totalQuantity));
+        this.storage.setItem('totalPrice', JSON.stringify(this.totalPrice));
+        this.storage.setItem('totalQuantity', JSON.stringify(this.totalQuantity));
   
     // compute cart total price and quantity
     this.cartService.computeCartTotals();

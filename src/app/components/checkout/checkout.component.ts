@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Order } from 'src/app/common/order';
 import { OrderItem } from 'src/app/common/order-item';
 import { Purchase } from 'src/app/common/purchase';
+import { User } from 'src/app/common/user';
 
 @Component({
   selector: 'app-checkout',
@@ -24,6 +25,7 @@ export class CheckoutComponent implements OnInit {
   
   creditCardYears: number[] = [];
   creditCardMonths: number[] = [];
+  user: User;
 
   countries: Country[] = [];
 
@@ -34,11 +36,17 @@ export class CheckoutComponent implements OnInit {
               private reactiveFormService: ReactiveFormService,
               private cartService: CartService,
               private checkoutService: CheckoutService,
-              private router: Router) { }
+              private router: Router) { 
+              }
 
   ngOnInit(): void {
+
+    this.user = JSON.parse(localStorage.getItem("user"));
+
+    this.cartService.computeCartTotals();
     
     this.reviewCartDetails();
+
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
@@ -89,11 +97,9 @@ export class CheckoutComponent implements OnInit {
     // populate credit card months
 
     const startMonth: number = new Date().getMonth() + 1;
-    console.log("startMonth: " + startMonth);
 
     this.reactiveFormService.getCreditCardMonths(startMonth).subscribe(
       data => {
-        console.log("Retrieved credit card months: " + JSON.stringify(data));
         this.creditCardMonths = data;
       }
     );
@@ -102,7 +108,6 @@ export class CheckoutComponent implements OnInit {
 
     this.reactiveFormService.getCreditCardYears().subscribe(
       data => {
-        console.log("Retrieved credit card years: " + JSON.stringify(data));
         this.creditCardYears = data;
       }
     );
@@ -111,11 +116,15 @@ export class CheckoutComponent implements OnInit {
 
     this.reactiveFormService.getCountries().subscribe(
       data => {
-        console.log("Retrieved countries: " + JSON.stringify(data));
         this.countries = data;
       }
     );
+
+
+    
   }
+
+
 
   reviewCartDetails() {
 

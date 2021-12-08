@@ -14,6 +14,7 @@ import { AuthenticationGuard } from './guard/authentication.guard';
 import { NotificationModule } from './notification.module';
 import { NotifierModule } from 'angular-notifier';
 import { AdminDashboardModule } from './admin-dashboard/module/admin-dashboard/admin-dashboard.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
 ]
@@ -21,7 +22,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [    
-  
     CheckoutComponent, ProductDetailsComponent, CartDetailsComponent,
   ],
   imports: [
@@ -30,6 +30,9 @@ const routes: Routes = [
     BrowserModule,
     NotificationModule,
     AdminDashboardModule,
+    NotifierModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [ AuthenticationGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

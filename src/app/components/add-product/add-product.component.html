@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="d-flex justify-content-center h-50">
+        <div class="user_card">
+          <div class="d-flex justify-content-center">
+              <h3>Add new product</h3>
+          </div>
+          
+          <div class="d-flex justify-content-center form_container">
+            <form #addProductForm="ngForm" (ngSubmit)="onAddProduct(addProductForm.value)"  autocomplete="on">
+
+              <select ngModel #categoryId="ngModel" class="category-select" name="categoryId">
+                <option name="category-selected" value=1>Books</option>
+                <option name="category-selected" value=2>Coffee Mugs</option>
+                <option name="category-selected" value=3>Mouse Pads</option>
+                <option name="category-selected" value=4>Luggage Tags</option>
+            </select>
+
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="sku" placeholder="Sku" required ngModel #sku="ngModel">
+              </div>
+              <span class="help-block" *ngIf="sku.invalid && sku.touched" style="color:red;">Please enter the Sku</span>
+
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="name" placeholder="Name" required ngModel #name="ngModel">
+              </div>
+              <span class="help-block" *ngIf="name.invalid && name.touched" style="color:red;">Please enter the product name</span>
+
+              <div class="input-group mb-3">
+                <input type="number" class="form-control" name="unitPrice" placeholder="Price" required ngModel #unitPrice="ngModel" step="0.01">
+              </div>
+              <span class="help-block" *ngIf="unitPrice.invalid && unitPrice.touched" style="color:red;">Please enter price</span>
+
+              <div class="input-group mb-3">
+                <input type="number" class="form-control" name="unitsInStock" placeholder="Units In Stock" required ngModel #unitsInStock="ngModel">
+              </div>
+              <span class="help-block" *ngIf="unitsInStock.invalid && unitsInStock.touched" style="color:red;">Please enter units in stock</span>
+
+              <div class="input-group mb-2">
+                <input type="text" class="form-control" name="imageUrl" placeholder="Image URL" required ngModel #imageUrl="ngModel">
+              </div>
+              <span class="help-block" *ngIf="imageUrl.invalid && imageUrl.touched" style="color:red;">Please enter image URL.</span>
+
+              <div class="input-group mb-3">
+                <textarea type="text" class="form-control" name="description" placeholder="Description" required ngModel #description="ngModel"></textarea>
+              </div>
+              <span class="help-block" *ngIf="description.invalid && description.touched" style="color:red;">Please enter the description</span>
+            
+              <select ngModel #active="ngModel" class="category-select" name="active" class="selecting-active">
+                <option value="true" selected>Active</option>
+                <option value="false">Inactive</option>
+            </select>
+            
+          <div class="d-flex justify-content-center mt-3 login_container">
+            <button type="submit" name="button" class="addToCart-button">
+ <!--             <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp; 
+              <span *ngIf="showLoading">Loading...</span>  -->
+              <span class="btn-text">Save</span>
+            </button>
+          </div>
+        </form>
+      </div>
+  </div>
+  

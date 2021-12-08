@@ -11,6 +11,10 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { Router } from '@angular/router';
 import { FileUploadStatus } from '../../../common/file-upload.status';
 import { Role } from '../../../common/enum/role';
+import { Orders } from 'src/app/common/orders';
+import { OrdersMassaged } from 'src/app/common/ordersMassaged';
+import { ThisReceiver } from '@angular/compiler';
+import { OrdersProduct } from 'src/app/common/ordersProduct';
 
 @Component({
   selector: 'app-user',
@@ -30,6 +34,15 @@ export class UserComponent implements OnInit, OnDestroy {
   public editUser = new User();
   private currentUsername: string;
   public fileStatus = new FileUploadStatus();
+  public orders: Orders[];
+  receivedOrders: OrdersMassaged[] = [];
+  receivedOrder: OrdersMassaged;
+  ordersProd: OrdersProduct;
+  iteratedId: number;
+  reducedResponse: Orders[] = [];
+  imageUrl: string = "";
+  currentOrderId: number = 0;
+  ordersProducts: OrdersProduct[] = [];
 
   constructor(private router: Router, private authenticationService: AuthenticationService,
               private userService: UserService, private notificationService: NotificationService) {}
@@ -43,11 +56,68 @@ export class UserComponent implements OnInit, OnDestroy {
     this.titleSubject.next(title);
   }
 
+  public showOrders(user: User) {
+    this.userService.getOrders(user.username).subscribe(
+      (response: Orders[]) => {
+
+        if (this.receivedOrders.length != 0) {
+          this.receivedOrders = [];
+
+          for (let i = 0; i < response.length; i++) {
+            this.currentOrderId = response[i].orderId;
+  
+            this.reducedResponse = response.filter(item => item.orderId == this.currentOrderId);
+  
+            this.reducedResponse.forEach(order => {
+                this.ordersProd = new OrdersProduct(order.productId, response[i].imageURL, order.productName)
+                this.ordersProducts.push(this.ordersProd);
+              }
+            )
+  
+            this.receivedOrder = new OrdersMassaged(response[i].orderId, response[i].orderDate, response[i].price, this.ordersProducts)
+            
+            if (!this.receivedOrders.some(element => element.orderId === this.currentOrderId)) {
+              this.receivedOrders.push(this.receivedOrder);
+            }
+            this.ordersProducts = [];
+          }
+        } else {
+          for (let i = 0; i < response.length; i++) {
+            this.currentOrderId = response[i].orderId;
+  
+            this.reducedResponse = response.filter(item => item.orderId == this.currentOrderId);
+  
+            this.reducedResponse.forEach(order => {
+                this.ordersProd = new OrdersProduct(order.productId, response[i].imageURL, order.productName)
+                this.ordersProducts.push(this.ordersProd);
+              }
+            )
+  
+            this.receivedOrder = new OrdersMassaged(response[i].orderId, response[i].orderDate, response[i].price, this.ordersProducts)
+            
+            if (!this.receivedOrders.some(element => element.orderId === this.currentOrderId)) {
+              this.receivedOrders.push(this.receivedOrder);
+            }
+            this.ordersProducts = [];
+          }
+        }
+
+
+
+        
+        console.log(this.receivedOrders);
+      }
+    );
+
+    this.clickButton('openViewOrders');
+  }
+
   public getUsers(showNotification: boolean): void {
     this.refreshing = true;
     this.subscriptions.push(
       this.userService.getUsers().subscribe(
         (response: User[]) => {
+          console.log(response)
           this.userService.addUsersToLocalCache(response);
           this.users = response;
           this.refreshing = false;

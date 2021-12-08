@@ -9,11 +9,11 @@ export class User {
     public lastLoginDateDisplay: any;
     public joinDate: Date | null;
     public profileImageUrl: string;
-    public active: boolean;
+    public isActive: boolean;
     public notLocked: boolean;
     public role: string;
     public authorities: [];
-    public orders: [];
+  //  public orders: [];
   
     constructor() {
       this.userId = '';
@@ -25,10 +25,10 @@ export class User {
       this.lastLoginDateDisplay = null;
       this.joinDate = null;
       this.profileImageUrl = '';
-      this.active = false;
+      this.isActive = false;
       this.notLocked = false;
       this.role = '';
       this.authorities = [];
-      this.orders = [];
+  //    this.orders = [];
     }
 }

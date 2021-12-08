@@ -18,7 +18,10 @@
     background: linear-gradient(45deg,#dc3545,#dc3545);
   }
   
-  
+  .actuator-container {
+    max-width: 100vw;
+  }
+
   .card {
     border-radius: 5px;
     -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
@@ -56,4 +59,120 @@
     margin-right: 20px;
     margin-left: 20px;
   }
+
+
+
+.system-info-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+}
+
+.refresh-btn {
+  margin-top: -0.5rem;
+  margin-right: -1.5rem;
+}
+
+.refresh-bth:visited {
+  font-size: 1.25rem;
+    background-color: #E9E3C3 !important;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    color: black;
+    padding: 0.5rem 0.5rem;
+    white-space: nowrap;
+    outline: rgb(180, 180, 90) solid 1px;
+    border: none;
+}
+
+span {
+  margin-right: 1rem;
+}
   
+.http-response-container {
+  display: flex;
+  width: 100%;
+  margin: 2rem 0 2rem 5rem;
+}
+
+.response-card {
+  background-color: black !important;
+  color: yellow;
+  width: 22%;
+  height: 9.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.response-card:not(:first-child) {
+  margin-left: 1rem;
+}
+
+.response-info-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0 2rem 1rem;
+}
+
+.response-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.response {
+  align-self: start;
+  padding-right: 10rem;
+  padding-top: 0.4rem;
+  font-size: 1.2rem;
+  white-space: nowrap
+}
+
+.response-number {
+  border: 1px solid rgb(20, 184, 20);
+  color: rgb(94, 245, 94);
+  border-left: none;
+  border-top: none;
+}
+
+.response-number-blue {
+  border: 1px solid rgb(172, 192, 209);
+  color: rgb(162, 184, 202);
+  border-left: none;
+  border-top: none;
+}
+
+.response-number-orange {
+  border: 1px solid rgb(255, 185, 55);
+  color: rgb(255, 185, 55);
+  border-left: none;
+  border-top: none;
+}
+
+.response-number-red {
+  border: 1px solid red;
+  color: red;
+  border-left: none;
+  border-top: none;
+}
+
+.last-updated-container {
+  margin: 1rem 0 0 1rem;
+}
+
+.canvas-container {
+  margin: 2rem auto;
+  display: flex;
+}
+
+.color-pagi {
+  background-color: rgb(233,227,195) !important;
+}
+
+.ngx-pagination .current {
+  background: rgb(233,227,195) !important;
+
+}
