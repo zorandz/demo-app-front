@@ -85,11 +85,11 @@ export class ProductService {
   }
 
   delete(id: number): Observable<CustomHttpResponse> {
-    return this.httpClient.delete<CustomHttpResponse>(`${this.baseUrl}/delete/${id}`)  
+    return this.httpClient.delete<CustomHttpResponse>(`${this.baseUrl}/delete/${id}`, {
+      observe: 'body'
+    })  
   }
 }
-
-
 
 interface SearchByNameResponse {
   _embedded: {

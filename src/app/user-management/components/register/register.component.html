@@ -1,28 +1,26 @@
 <div class="container">
     <div class="d-flex justify-content-center h-50">
-        <div class="user_card">
+        <div class="register-box">
           <img src="../../../../assets/images/bg/register-bg.jpg" alt="image here" class="register-img">
           <div class="d-flex justify-content-center">
-            <div style="margin-top: 10px;margin-bottom:-90px;">
-              <h3 style="z-index: 10;">Register</h3>
-            </div>
+              <h3 class="register-text">Register</h3>
           </div>
           <div class="d-flex justify-content-center form_container">
-            <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)" autocomplete>
+            <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)" autocomplete class="register-form">
               <div class="input-group mb-3">
                 <div class="input-group-append">
                   <span class="input-group-text"><i class="fas fa-user firstName-icon"></i></span>
                 </div>
                 <input type="text" class="form-control" name="firstName" placeholder="First name" required ngModel #firstNameInput="ngModel">
               </div>
-              <span class="help-block" *ngIf="firstNameInput.invalid && firstNameInput.touched" style="color:red;">Please enter a first name</span>
+              <span class="warning-msg" *ngIf="firstNameInput.invalid && firstNameInput.touched">Please enter first name</span>
               <div class="input-group mb-3">
                 <div class="input-group-append">
                   <span class="input-group-text"><i class="fas fa-user firstName-icon"></i></span>
                 </div>
                 <input type="text" class="form-control" name="lastName" placeholder="Last name" required ngModel #lastNameInput="ngModel">
               </div>
-              <span class="help-block" *ngIf="lastNameInput.invalid && lastNameInput.touched" style="color:red;">Please enter a last name</span>
+              <span class="warning-msg" *ngIf="lastNameInput.invalid && lastNameInput.touched">Please enter last name</span>
 
               <div class="input-group mb-3">
                 <div class="input-group-append">
@@ -30,7 +28,7 @@
                 </div>
                 <input type="text" class="form-control" name="username" placeholder="Username" required ngModel #usernameInput="ngModel">
               </div>
-              <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched" style="color:red;">Please enter a username</span>
+              <span class="warning-msg" *ngIf="usernameInput.invalid && usernameInput.touched">Please enter the username</span>
 
               <div class="input-group mb-2">
                 <div class="input-group-append">
@@ -38,7 +36,7 @@
                 </div>
                 <input type="text" class="form-control" name="email" placeholder="Email" required ngModel #emailInput="ngModel">
               </div>
-              <span class="help-block" *ngIf="emailInput.invalid && emailInput.touched" style="color:red;">Please enter an email.</span>
+              <span class="warning-msg" *ngIf="emailInput.invalid && emailInput.touched">Please enter email.</span>
 
               <div class="input-group mb-3 pass-input">
                 <div class="input-group-append">
@@ -46,10 +44,10 @@
                 </div>
                 <input type="password" class="form-control" name="password" placeholder="Password" required ngModel #passwordInput="ngModel">
               </div>
-              <span class="help-block" *ngIf="passwordInput.invalid && usernameInput.touched" style="color:red;">Please enter password</span>
+              <span class="warning-msg" *ngIf="passwordInput.invalid && usernameInput.touched">Please enter password</span>
 
           <div class="d-flex justify-content-center mt-3 login_container">
-            <button [disabled]="registerForm.invalid || showLoading" type="submit" name="button" class="btn login_btn">
+            <button [disabled]="registerForm.invalid || showLoading" type="submit" name="button" class="register-btn">
               <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
               <span *ngIf="showLoading">Loading...</span>
               <span class="btn-text" *ngIf="!showLoading">Register</span>

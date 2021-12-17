@@ -32,7 +32,7 @@
               "src/assets/css/myStyles.css"
             ],
             "scripts": [
-              "src/assets/scripts/myScript.js"
+              "src/assets/js/scripts.js"
             ]
           },
           "configurations": {
@@ -40,13 +40,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "5000kb",
+                  "maximumError": "4mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "10kb",
+                  "maximumError": "10kb"
                 }
               ],
               "fileReplacements": [

@@ -1,10 +1,14 @@
+<notifier-container [ngClass]="{ 'finally-notifier': notify }" class="notifier"></notifier-container>
+
   <div class="product-container">
+
 
     <div class="product-row">
 
       <div *ngFor="let tempProduct of products" class="product">
         <div class="product-box">
-          <button class="delete-btn" (click)="onDelete(tempProduct.id)">Delete</button>
+          <button class="delete-btn btn-danger" *ngIf="showButton" (click)="onDelete(tempProduct.id)">Delete</button>
+          <button class="update-btn addToCart-button" (click)="onUpdate(tempProduct.id)">Update</button>
           <a routerLink="/products/{{ tempProduct.id }}">
             <img src="{{ tempProduct.imageUrl }}" class="img-product" />
           </a>
@@ -18,7 +22,6 @@
               Add to cart
             </button>
           </div>
-        
           <p>{{ tempProduct.categoryId }}</p>
         </div>
       </div>
@@ -65,5 +68,6 @@
         </div>
       </div>
     </div>
+
   </div>
 

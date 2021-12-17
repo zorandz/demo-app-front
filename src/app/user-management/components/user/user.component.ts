@@ -43,6 +43,7 @@ export class UserComponent implements OnInit, OnDestroy {
   imageUrl: string = "";
   currentOrderId: number = 0;
   ordersProducts: OrdersProduct[] = [];
+  notify: boolean = false;
 
   constructor(private router: Router, private authenticationService: AuthenticationService,
               private userService: UserService, private notificationService: NotificationService) {}
@@ -59,52 +60,47 @@ export class UserComponent implements OnInit, OnDestroy {
   public showOrders(user: User) {
     this.userService.getOrders(user.username).subscribe(
       (response: Orders[]) => {
+        console.log(response);
 
         if (this.receivedOrders.length != 0) {
           this.receivedOrders = [];
-
-          for (let i = 0; i < response.length; i++) {
-            this.currentOrderId = response[i].orderId;
-  
-            this.reducedResponse = response.filter(item => item.orderId == this.currentOrderId);
-  
-            this.reducedResponse.forEach(order => {
-                this.ordersProd = new OrdersProduct(order.productId, response[i].imageURL, order.productName)
-                this.ordersProducts.push(this.ordersProd);
-              }
-            )
-  
-            this.receivedOrder = new OrdersMassaged(response[i].orderId, response[i].orderDate, response[i].price, this.ordersProducts)
-            
-            if (!this.receivedOrders.some(element => element.orderId === this.currentOrderId)) {
-              this.receivedOrders.push(this.receivedOrder);
-            }
-            this.ordersProducts = [];
-          }
-        } else {
-          for (let i = 0; i < response.length; i++) {
-            this.currentOrderId = response[i].orderId;
-  
-            this.reducedResponse = response.filter(item => item.orderId == this.currentOrderId);
-  
-            this.reducedResponse.forEach(order => {
-                this.ordersProd = new OrdersProduct(order.productId, response[i].imageURL, order.productName)
-                this.ordersProducts.push(this.ordersProd);
-              }
-            )
-  
-            this.receivedOrder = new OrdersMassaged(response[i].orderId, response[i].orderDate, response[i].price, this.ordersProducts)
-            
-            if (!this.receivedOrders.some(element => element.orderId === this.currentOrderId)) {
-              this.receivedOrders.push(this.receivedOrder);
-            }
-            this.ordersProducts = [];
-          }
         }
-
-
-
-        
+          for (let i = 0; i < response.length; i++) {
+            this.currentOrderId = response[i].orderId;
+  
+            this.reducedResponse = response.filter(item => item.orderId == this.currentOrderId);
+  
+            this.reducedResponse.forEach(order => {
+                this.ordersProd = new OrdersProduct(order.productId, order.imageURL, order.productName)
+                this.ordersProducts.push(this.ordersProd);
+              }
+            )
+  
+            this.receivedOrder = new OrdersMassaged(response[i].orderId, response[i].orderDate, response[i].price, this.ordersProducts)
+            
+            if (!this.receivedOrders.some(element => element.orderId === this.currentOrderId)) {
+              this.receivedOrders.push(this.receivedOrder);
+            }
+            this.ordersProducts = [];
+          }
+          for (let i = 0; i < response.length; i++) {
+            this.currentOrderId = response[i].orderId;
+  
+            this.reducedResponse = response.filter(item => item.orderId == this.currentOrderId);
+  
+            this.reducedResponse.forEach(order => {
+                this.ordersProd = new OrdersProduct(order.productId, order.imageURL, order.productName)
+                this.ordersProducts.push(this.ordersProd);
+              }
+            )
+  
+            this.receivedOrder = new OrdersMassaged(response[i].orderId, response[i].orderDate, response[i].price, this.ordersProducts)
+            
+            if (!this.receivedOrders.some(element => element.orderId === this.currentOrderId)) {
+              this.receivedOrders.push(this.receivedOrder);
+            }
+            this.ordersProducts = [];
+          }
         console.log(this.receivedOrders);
       }
     );
@@ -117,12 +113,14 @@ export class UserComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.userService.getUsers().subscribe(
         (response: User[]) => {
-          console.log(response)
           this.userService.addUsersToLocalCache(response);
           this.users = response;
           this.refreshing = false;
           if (showNotification) {
             this.sendNotification(NotificationType.SUCCESS, `${response.length} user(s) loaded successfully.`);
+            setTimeout(() => {
+              this.notify = true;
+            }, 100)
           }
         },
         (errorResponse: HttpErrorResponse) => {
@@ -159,10 +157,12 @@ export class UserComponent implements OnInit, OnDestroy {
           this.profileImage = null;
           userForm.reset();
           this.sendNotification(NotificationType.SUCCESS, `${response.firstName} ${response.lastName} added successfully`);
+          this.notify = true;
         },
         (errorResponse: HttpErrorResponse) => {
           console.log(errorResponse);
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+          this.notify = true;
           this.profileImage = null;
         }
       )
@@ -179,10 +179,12 @@ export class UserComponent implements OnInit, OnDestroy {
           this.fileName = null;
           this.profileImage = null;
           this.sendNotification(NotificationType.SUCCESS, `${response.firstName} ${response.lastName} updated successfully`);
+          this.notify = true;
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
           this.profileImage = null;
+          this.notify = true;
         }
       )
       );
@@ -200,11 +202,13 @@ export class UserComponent implements OnInit, OnDestroy {
           this.fileName = null;
           this.profileImage = null;
           this.sendNotification(NotificationType.SUCCESS, `${response.firstName} ${response.lastName} updated successfully`);
+          this.notify = true;
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
           this.refreshing = false;
           this.profileImage = null;
+          this.notify = true;
         }
       )
       );
@@ -222,6 +226,7 @@ export class UserComponent implements OnInit, OnDestroy {
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
           this.fileStatus.status = 'done';
+          this.notify = true;
         }
       )
     );
@@ -238,9 +243,11 @@ export class UserComponent implements OnInit, OnDestroy {
           this.user.profileImageUrl = `${event.body.profileImageUrl}?time=${new Date().getTime()}`;
           this.sendNotification(NotificationType.SUCCESS, `${event.body.firstName}\'s profile image updated successfully`);
           this.fileStatus.status = 'done';
+          this.notify = true;
           break;
         } else {
           this.sendNotification(NotificationType.ERROR, `Unable to upload image. Please try again`);
+          this.notify = true;
           break;
         }
       default:
@@ -256,6 +263,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this.authenticationService.logOut();
     this.router.navigate(['/login']);
     this.sendNotification(NotificationType.SUCCESS, `You've been successfully logged out`);
+    this.notify = true;
   }
 
   public onResetPassword(emailForm: NgForm): void {
@@ -265,11 +273,13 @@ export class UserComponent implements OnInit, OnDestroy {
       this.userService.resetPassword(emailAddress).subscribe(
         (response: CustomHttpResponse) => {
           this.sendNotification(NotificationType.SUCCESS, response.message);
+          this.notify = true;
           this.refreshing = false;
         },
         (error: HttpErrorResponse) => {
           this.sendNotification(NotificationType.WARNING, error.error.message);
           this.refreshing = false;
+          this.notify = true;
         },
         () => emailForm.reset()
       )
@@ -280,11 +290,14 @@ export class UserComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.userService.deleteUser(username).subscribe(
         (response: CustomHttpResponse) => {
+          console.log(response)
           this.sendNotification(NotificationType.SUCCESS, response.message);
           this.getUsers(false);
+          this.notify = true;
         },
         (error: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, error.error.message);
+          this.notify = true;
         }
       )
     );
@@ -331,8 +344,14 @@ export class UserComponent implements OnInit, OnDestroy {
   private sendNotification(notificationType: NotificationType, message: string): void {
     if (message) {
       this.notificationService.notify(notificationType, message);
+      setTimeout(()=>{                           
+        this.notify = false;
+   }, 4000);
     } else {
       this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
+      setTimeout(()=>{                           
+        this.notify = false;
+   }, 4000);
     }
   }
 

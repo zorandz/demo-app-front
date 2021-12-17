@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartItem } from 'src/app/common/cart-item';
+import { CustomHttpResponse } from 'src/app/common/custom-http-response';
+import { NotificationType } from 'src/app/common/enum/notification-type';
+import { Role } from 'src/app/common/enum/role';
 import { Product } from 'src/app/common/product';
 import { ProductCategory } from 'src/app/common/product-category';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CartService } from 'src/app/services/cart.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductCategoryMenuComponent } from '../product-category-menu/product-category-menu.component';
 
@@ -20,22 +25,29 @@ export class ProductListComponent implements OnInit {
   previousCategoryId: number = 1;
   searchMode!: boolean;
   areEmpty!: boolean;
+  notify: boolean;
 
   //properties for pagination:
   thePageNumber: number = 1;
-  thePageSize: number = 10;
+  thePageSize: number = 12;
   theTotalElements: number = 0;
 
   previousKeyword!: string;
+  showButton: boolean;
 
   constructor(private productService: ProductService, 
               private route: ActivatedRoute,
-              private cartService: CartService) { }
+              private cartService: CartService,
+              private notificationService: NotificationService,
+              private authenticationService: AuthenticationService
+              ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       this.listProducts();
     })
+
+    this.isLogged();
   }
 
   updatePageSize(value: number) {
@@ -45,15 +57,42 @@ export class ProductListComponent implements OnInit {
 
   }
 
+  
+
+
   onDelete(id: number) {
     this.productService.delete(id).subscribe(
-      response => {
-        console.log(response);
+      (response: CustomHttpResponse) => {
+        console.log(response)
+        this.sendNotification(NotificationType.SUCCESS, `Product successfully deleted.`);
+          this.notify = true;
       },
       errorRes => {
-        console.log(errorRes);
       }
     )
+  //  this.refresh();
+  }
+
+  private sendNotification(notificationType: NotificationType, message: string): void {
+    if (message) {
+      this.notificationService.notify(notificationType, message);
+      setTimeout(()=>{                           
+        this.notify = false;
+   }, 4000);
+    } else {
+      this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
+      setTimeout(()=>{                           
+        this.notify = false;
+   }, 4000);
+    }
+  }
+
+  refresh(): void {
+    window.location.reload();
+    }
+
+  onUpdate(id: number) {
+
   }
 
   listProducts() {   
@@ -121,6 +160,28 @@ export class ProductListComponent implements OnInit {
     const theCartItem = new CartItem(product);
 
     this.cartService.addToCart(theCartItem);
+  }
+
+  public get isAdmin(): boolean {
+    return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+  }
+
+  public get isManager(): boolean {
+    return this.isAdmin || this.getUserRole() === Role.MANAGER;
+  }
+
+  public get isAdminOrManager(): boolean {
+    return this.isAdmin || this.isManager;
+  }
+
+  private getUserRole(): string {
+    return this.authenticationService.getUserFromLocalCache().role;
+  }
+
+  isLogged() {
+    if (this.authenticationService.isUserLoggedIn() && this.authenticationService.isAuthorized(JSON.parse(localStorage.getItem('user')))){
+      this.showButton = true;
+    }
   }
 
 }

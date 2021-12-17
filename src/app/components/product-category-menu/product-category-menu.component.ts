@@ -3,8 +3,6 @@ import { ProductCategory } from 'src/app/common/product-category';
 import { ProductService } from 'src/app/services/product.service';
 import { EventEmitter } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { User } from 'src/app/common/user';
-import { Role } from 'src/app/common/enum/role';
 import { Subscription } from 'rxjs';
 
 @Component({

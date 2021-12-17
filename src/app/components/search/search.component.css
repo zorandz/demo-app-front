@@ -10,7 +10,6 @@
     -webkit-transition: box-shadow 0.25s;
     transition: box-shadow 0.25s;
     color: black;
-    clip-path: polygon(0 0, 96.5% 0, 100% 100%, 3.5% 100%);
   }
 
   .bn30::placeholder {
@@ -18,6 +17,19 @@
       opacity: 0.3;
   }
 
+  .search-btn {
+    font-size: 2rem;
+    background-color: rgb(63, 63, 11);
+    border-radius: 4px 4px 4px 4px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    outline: none;
+    border: 1rem;
+    
+  }
+  
   .search-form {
       display: flex;
       margin-left: 3rem;
@@ -32,7 +44,6 @@
     padding: 0.7em 2em;
     background-color: rgb(63, 63, 11);
     color: white;
-    clip-path: polygon(0 0, 93% 0%, 100% 100%, 6.5% 100%);
   }
 
   .b32:hover {

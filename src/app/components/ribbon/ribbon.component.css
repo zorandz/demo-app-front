@@ -1,0 +1,31 @@
+.ribbon {
+    width: 20rem;
+    padding: 1.6rem;
+    position: fixed;
+    text-align: center;
+    color: white;
+    z-index: 2;
+}
+
+.ribbon.top-left {
+    right: -5rem;
+    bottom: 2.5rem;
+    transform: rotate(45deg);
+}
+
+.ribbon.success {
+    background-color: lightgreen;
+
+}
+
+.ribbon.info {
+    background-color: blue;
+}
+
+.ribbon.warning {
+    background-color: orange;
+}
+
+.ribbon.error {
+    background-color: red;
+}

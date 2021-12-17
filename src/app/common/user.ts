@@ -10,7 +10,7 @@ export class User {
     public joinDate: Date | null;
     public profileImageUrl: string;
     public isActive: boolean;
-    public notLocked: boolean;
+    public isNotLocked: boolean;
     public role: string;
     public authorities: [];
   //  public orders: [];
@@ -25,8 +25,8 @@ export class User {
       this.lastLoginDateDisplay = null;
       this.joinDate = null;
       this.profileImageUrl = '';
-      this.isActive = false;
-      this.notLocked = false;
+      this.isActive = true;
+      this.isNotLocked = true;
       this.role = '';
       this.authorities = [];
   //    this.orders = [];

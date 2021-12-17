@@ -11,14 +11,19 @@ import { AuthenticationService } from './services/authentication.service';
 })
 export class AppComponent implements OnInit {
   title = 'zoran-demo-front';
+  disappear: boolean;
 
   portfolioMode: boolean = false;
   router: Router;
+  showNotifier: boolean = false;
   
   constructor(private _router: Router) {
     this.router = _router;
   }
 
+  onClick() {
+    this.disappear = !this.disappear;
+  }
   
   ngOnInit() {
   }

@@ -1,4 +1,7 @@
 <div class="container">
+
+  <notifier-container [ngClass]="{ 'finally-notifier': notify }" class="notifier"></notifier-container>
+
  <!-- <div class="row mb-2 mt-2 text-center">
     <div class="col-md-4">
     </div>
@@ -79,7 +82,7 @@
               <span [hidden]="appUser?.isActive" class="badge badge-danger">Inactive</span>
             </td>
             <td>
-              <button class="btn btn-outline-info" (click)="showOrders(appUser)"><i class="fa-duotone fa-gem"></i></button>
+              <button class="addToCart-button" (click)="showOrders(appUser)">Show Orders</button>
             </td>
             <td class="">
               <div class="btn-group">
@@ -225,8 +228,8 @@
                                         <label class="custom-control-label">Active</label>
                                       </div>
                                       <div class="custom-control custom-checkbox">
-                                        <input name="notLocked" type="checkbox"
-                                          [(ngModel)]="user.notLocked" class="custom-control-input">
+                                        <input name="isNotLocked" type="checkbox"
+                                          [(ngModel)]="user.isNotLocked" class="custom-control-input">
                                         <label class="custom-control-label">Unlocked</label>
                                       </div>
                                     </div>
@@ -331,12 +334,12 @@
                       class="fas fa-sign-in-alt float-right"></i>{{selectedUser?.lastLoginDateDisplay | date: 'medium'}}
                   </li>
                   <li class="list-group-item">
-                    <span [hidden]="selectedUser?.notLocked">
+                    <span [hidden]="selectedUser?.isNotLocked">
                       <i class="fa fa-lock float-right" style="color: red;">
                       </i>
                       Account Locked
                     </span>
-                    <span [hidden]="!selectedUser?.notLocked">
+                    <span [hidden]="!selectedUser?.isNotLocked">
                       <i class="fa fa-unlock float-right" style="color: green;">
                       </i>
                       Account Unlocked
@@ -419,7 +422,7 @@
                   </div>
                   <div class="form-check disabled">
                     <label class="form-check-label">
-                      <input type="checkbox" name="notLocked" ngModel class="form-check-input">
+                      <input type="checkbox" name="isNotLocked" ngModel class="form-check-input">
                       Unlocked
                     </label>
                   </div>
@@ -506,7 +509,7 @@
               </div>
               <div class="form-check disabled">
                 <label class="form-check-label">
-                  <input name="locked" type="checkbox" [disabled]="!isManager" [(ngModel)]="editUser.notLocked"
+                  <input name="locked" type="checkbox" [disabled]="!isManager" [(ngModel)]="editUser.isNotLocked"
                     class="form-check-input">
                   Unlocked <small [hidden]="isManager">(read only)</small>
                 </label>
@@ -591,7 +594,7 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             </div>
             <div class="form-check disabled">
               <label class="form-check-label">
-                <input name="locked" type="checkbox" [(ngModel)]="editUser.notLocked"
+                <input name="locked" type="checkbox" [(ngModel)]="editUser.isNotLocked"
                   class="form-check-input">
                 Unlocked
               </label>
@@ -608,6 +611,7 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 </div>
 </div>
 
+<!--view orders modal-->
 <div class="modal fade bd-example-modal-lg" id="viewOrders" tabindex="-1" role="dialog" aria-labelledby=""
       aria-hidden="true">
       <div class="modal-dialog" role="document">

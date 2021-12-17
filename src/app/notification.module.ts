@@ -10,15 +10,15 @@ const customNotifierOptions: NotifierOptions = {
           vertical: {
               position: 'top',
               distance: 12,
-              gap: 10
+              gap: 0
           }
       },
     theme: 'material',
     behaviour: {
-      autoHide: 5000,
+      autoHide: 4000,
       onClick: 'hide',
       onMouseover: 'pauseAutoHide',
-      showDismissButton: true,
+      showDismissButton: false,
       stacking: 4
     },
     animations: {
@@ -44,7 +44,6 @@ const customNotifierOptions: NotifierOptions = {
 
 @NgModule({
   imports: [NotifierModule.withConfig(customNotifierOptions)],
-  exports: [NotifierModule],
-  providers: [ ]
+  exports: [NotifierModule]
 })
 export class NotificationModule {}

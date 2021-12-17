@@ -1,4 +1,7 @@
+<notifier-container [ngClass]="{ 'finally-notifier': notify }" class="notifier"></notifier-container>
+
 <div class="container">
+
     <div class="d-flex justify-content-center h-50">
         <div class="user_card">
           <div class="d-flex justify-content-center">
@@ -54,7 +57,7 @@
             <button type="submit" name="button" class="addToCart-button">
  <!--             <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp; 
               <span *ngIf="showLoading">Loading...</span>  -->
-              <span class="btn-text">Save</span>
+              <span class="btn-text">Save<i *ngIf="showLoading" class="fas fa-spinner fa-spin">&nbsp;&nbsp;</i></span>
             </button>
           </div>
         </form>

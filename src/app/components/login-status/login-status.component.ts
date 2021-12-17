@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -9,10 +10,11 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginStatusComponent implements OnInit, OnDestroy {
 
+  isHeAuthorized: boolean = false;
   authenticated: boolean;
   subscription: Subscription;
   firstName: string = localStorage.getItem("firstName")
-  
+  dropdownString: string = "ss";
 
 
   constructor(private authService: AuthenticationService) { 
@@ -20,9 +22,32 @@ export class LoginStatusComponent implements OnInit, OnDestroy {
       this.authenticated = data
       )
   }
-    
+
+  
   ngOnInit(): void {
     this.isAuthenticated();
+    this.isAuthorized();
+  }
+  /*
+  @HostListener("window:click")
+  closeDropdown() {
+    if (this.dropdownString == "dropIt") {
+      this.dropdownString = "ss";
+      console.log("mislim")
+    }
+  }
+*/
+  isAuthorized() {
+    this.isHeAuthorized = this.authService.isAuthorized(JSON.parse(localStorage.getItem('user')));
+    console.log(this.isAuthorized);
+  }
+
+  dropdown(input: string) {
+    if (this.dropdownString == input) {
+      this.dropdownString = "ss";
+    } else {
+      this.dropdownString = "dropIt";
+    }
   }
 
   isAuthenticated() {
@@ -38,14 +63,10 @@ export class LoginStatusComponent implements OnInit, OnDestroy {
     this.authService.logOut();
     localStorage.clear();
     this.authenticated = false;
+    this.dropdownString = "ss"
   }
 
   
-  saveFirstNameToCache() {
-
-  }
-
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

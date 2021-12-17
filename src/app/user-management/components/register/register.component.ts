@@ -15,6 +15,7 @@ import { NotificationType } from '../../../common/enum/notification-type';
 export class RegisterComponent implements OnInit, OnDestroy {
   public showLoading: boolean;
   private subscriptions: Subscription[] = [];
+  notify: boolean;
 
   constructor(private router: Router, private authService: AuthenticationService,
               private notificationService: NotificationService) {}
@@ -30,10 +31,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.showLoading = false;
           this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.firstName}.
           Please check your email for password to log in.`);
+          this.notify = true;
           this.router.navigateByUrl('/');
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+          this.notify = true;
           this.showLoading = false;
         }
       )
@@ -43,8 +46,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private sendNotification(notificationType: NotificationType, message: string): void {
     if (message) {
       this.notificationService.notify(notificationType, message);
+      setTimeout(()=>{                           
+        this.notify = false;
+   }, 4000);
     } else {
       this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
+      setTimeout(()=>{                           
+        this.notify = false;
+   }, 4000);
     }
   }
 

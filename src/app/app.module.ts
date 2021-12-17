@@ -12,13 +12,12 @@ import { UserManagementModule } from './user-management/user-management/user-man
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthenticationGuard } from './guard/authentication.guard';
 import { NotificationModule } from './notification.module';
-import { NotifierModule } from 'angular-notifier';
 import { AdminDashboardModule } from './admin-dashboard/module/admin-dashboard/admin-dashboard.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NotificationService } from './services/notification.service';
 
 const routes: Routes = [
 ]
-
 
 @NgModule({
   declarations: [    
@@ -28,13 +27,12 @@ const routes: Routes = [
     AppRoutingModule,
     UserManagementModule,
     BrowserModule,
-    NotificationModule,
     AdminDashboardModule,
-    NotifierModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NotificationModule
   ],
-  providers: [ AuthenticationGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [ NotificationService, AuthenticationGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
