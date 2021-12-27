@@ -1,15 +1,16 @@
-  <div class="d-flex justify-content-center h-50">
+  <div class="d-flex justify-content-center login-container">
       <div class="user_card">
         <div class="d-flex justify-content-center">
           <div>
-            <h3>Login</h3>
           </div>
         </div>
         <div class="d-flex justify-content-center form_container">
           <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)" autocomplete="on">
+            <h3 class="login-title">Login</h3>
+
             <div class="input-group mb-3">
               <div class="input-group-append">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <span class="input-group-text"><i class="fas fa-user firstname-icon"></i></span>
               </div>
               <input type="text" class="form-control" name="username" placeholder="Username" ngModel
               #usernameInput="ngModel" required
@@ -30,20 +31,24 @@
             </div>
             <span class="help-block" style="color:red;"
             *ngIf="passwordInput.invalid && passwordInput.touched">Please enter a password.</span>
-        <div class="d-flex justify-content-center mt-3 login_container">
-          <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="btn login_btn">
+        <div class="buttons">
+          <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="black-btn login-btn">
             <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
             <span *ngIf="showLoading">Loading...</span>
-            <span *ngIf="!showLoading">Login</span>
+            <span *ngIf="!showLoading">Sign In</span> 
           </button>
+          <span class="or">OR</span>
+          <a routerLink="/register" class="ml-2 black-btn-imp sign-up">Sign Up</a>
         </div>
       </form>
     </div>
+    <!--
         <div class="mt-4">
           <div class="d-flex justify-content-center links">
-            Don't have an account?<a routerLink="/register" class="ml-2 sign-up-text" style="color: #2C3E50;">Sign Up</a>
+            Don't have an account?<a routerLink="/register" class="ml-2 sign-up">Sign Up</a>
           </div>
         </div>
+      -->
       </div>
     </div>
 

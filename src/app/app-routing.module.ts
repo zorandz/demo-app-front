@@ -25,7 +25,7 @@ const routes: Routes = [
   // { path: 'order-history', component: OrderHistoryComponent },
 { path: 'category/:id', component: ProductListComponent },
 { path: 'category', component: ProductListComponent },
-//{ path: 'products', redirectTo: '/register' },
+// { path: 'products', redirectTo: '/login' },
 { path: 'products', component: ProductListComponent },
   { path: 'checkout', component: CheckoutComponent},
  { path: 'cart-details', component: CartDetailsComponent},
@@ -36,7 +36,7 @@ const routes: Routes = [
  { path: '', redirectTo: '/login', pathMatch: 'full' },
  { path: 'add-product-form', component: AddProductComponent },
  { path: 'about-owner', component: OwnerComponent },
- //{ path: '**', redirectTo: '/register', pathMatch: 'full' }
+ //{ path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -54,7 +54,7 @@ const routes: Routes = [
     OwnerComponent
   ],
   imports: [
-    RouterModule.forRoot(routes), 
+    RouterModule.forRoot(routes, { useHash: true }), 
     CommonModule,
     NgbModule,
     HttpClientModule,

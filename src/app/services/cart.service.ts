@@ -1,62 +1,61 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../common/cart-item';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  cartItems: CartItem[];
+  cartItems: CartItem[] = [];
 
-  totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  totalPrice: Subject<number> = new BehaviorSubject<number>(0);
+  totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
   storage: Storage = sessionStorage;
+  // storage: Storage = localStorage;
 
   constructor() { 
-   /* let data = JSON.parse(this.storage.getItem('cartItems'));
 
-    if (data !=null) {
-      this.cartItems = data;
+      // read data from storage
+      let data = JSON.parse(this.storage.getItem('cartItems'));
 
-      this.computeCartTotals();
-    }*/
-
-    this.cartItems = JSON.parse(sessionStorage.getItem('cartItems')) != null ? JSON.parse(sessionStorage.getItem('cartItems')):[];
+      if (data != null) {
+        this.cartItems = data;
+        
+        // compute totals based on the data that is read from storage
+        this.computeCartTotals();
+      }
 
   }
 
   addToCart(theCartItem: CartItem) {
-    //check if we already have this item in cart
-    
+
+    // check if we already have the item in our cart
     let alreadyExistsInCart: boolean = false;
-    let existingCartItem: CartItem = undefined!;
+    let existingCartItem: CartItem = undefined;
 
-    //find the item in cart based on item id
     if (this.cartItems.length > 0) {
+      // find the item in the cart based on item id
 
-      existingCartItem = this.cartItems.find(item => item.id === theCartItem.id)!
+      existingCartItem = this.cartItems.find( tempCartItem => tempCartItem.id === theCartItem.id );
+
+      // check if we found it
+      alreadyExistsInCart = (existingCartItem != undefined);
     }
 
-    //check if we found it
-    alreadyExistsInCart = (existingCartItem != undefined);
-
     if (alreadyExistsInCart) {
-      //increment the quantity
+      // increment the quantity
       existingCartItem.quantity++;
-    } 
+    }
     else {
-      //just add the item to the array
+      // just add the item to the array
       this.cartItems.push(theCartItem);
     }
 
     // compute cart total price and total quantity
     this.computeCartTotals();
-
   }
-
-  //compute cart total price and total quantity.
 
   computeCartTotals() {
 
@@ -73,48 +72,46 @@ export class CartService {
     this.totalQuantity.next(totalQuantityValue);
 
     // log cart data just for debugging purposes
-    //this.logCartData(totalPriceValue, totalQuantityValue);
+    this.logCartData(totalPriceValue, totalQuantityValue);
 
+    // persist cart data
     this.persistCartItems();
-  }
-
-  logCartData(totalPriceValue: number, totalQuantityValue: number) {
-
-    console.log('Contents of the cart');
-    for (let tempCartItem of this.cartItems) {
-      const subTotalPrice = tempCartItem.quantity * tempCartItem.unitPrice;
-      console.log(`name: ${tempCartItem.name}, quantity=${tempCartItem.quantity}, unitPrice=${tempCartItem.unitPrice}, subTotalPrice=${subTotalPrice}`);
-    }
-
-    console.log(`totalPrice: ${totalPriceValue.toFixed(2)}, totalQuantity: ${totalQuantityValue}`);
-    console.log('----');
-  }
-
-  decrementQuantity(cartItem: CartItem) {
-    cartItem.quantity --;
-
-    if (cartItem.quantity === 0) {
-      this.remove(cartItem);
-    } else {
-      this.computeCartTotals();
-    }
-  }
-
-  remove(cartItem: CartItem) {
-    const itemIndex = this.cartItems.findIndex(item => item.id === cartItem.id);
-
-    if (itemIndex > -1) {
-      this.cartItems.splice(itemIndex, 1);
-    }
-
-    this.computeCartTotals();
-  }
-
-  persistPrice() {
-    this.storage.setItem('cartPrice', JSON.stringify(this.totalPrice)); 
   }
 
   persistCartItems() {
     this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
+
+  logCartData(totalPriceValue: number, totalQuantityValue: number) {
+
+    for (let tempCartItem of this.cartItems) {
+      const subTotalPrice = tempCartItem.quantity * tempCartItem.unitPrice;
+    }
+  }
+
+  decrementQuantity(theCartItem: CartItem) {
+
+    theCartItem.quantity--;
+
+    if (theCartItem.quantity === 0) {
+      this.remove(theCartItem);
+    }
+    else {
+      this.computeCartTotals();
+    }
+  }
+
+  remove(theCartItem: CartItem) {
+
+    // get index of item in the array
+    const itemIndex = this.cartItems.findIndex( tempCartItem => tempCartItem.id === theCartItem.id );
+
+    // if found, remove the item from the array at the given index
+    if (itemIndex > -1) {
+      this.cartItems.splice(itemIndex, 1);
+
+      this.computeCartTotals();
+    }
+  }
+
 }

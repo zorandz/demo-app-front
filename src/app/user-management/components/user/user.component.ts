@@ -44,6 +44,7 @@ export class UserComponent implements OnInit, OnDestroy {
   currentOrderId: number = 0;
   ordersProducts: OrdersProduct[] = [];
   notify: boolean = false;
+  isTablet: boolean;
 
   constructor(private router: Router, private authenticationService: AuthenticationService,
               private userService: UserService, private notificationService: NotificationService) {}
@@ -51,6 +52,21 @@ export class UserComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
     this.getUsers(true);
+
+    this.isTablet = this.getIsMobile();
+    window.onresize = () => {
+      this.isTablet = this.getIsMobile();
+    };
+  }
+
+  getIsMobile(): boolean {
+    const w = document.documentElement.clientWidth;
+    const breakpoint = 625;
+    if (w < breakpoint) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public changeTitle(title: string): void {
@@ -60,7 +76,6 @@ export class UserComponent implements OnInit, OnDestroy {
   public showOrders(user: User) {
     this.userService.getOrders(user.username).subscribe(
       (response: Orders[]) => {
-        console.log(response);
 
         if (this.receivedOrders.length != 0) {
           this.receivedOrders = [];
@@ -101,7 +116,6 @@ export class UserComponent implements OnInit, OnDestroy {
             }
             this.ordersProducts = [];
           }
-        console.log(this.receivedOrders);
       }
     );
 
@@ -160,7 +174,6 @@ export class UserComponent implements OnInit, OnDestroy {
           this.notify = true;
         },
         (errorResponse: HttpErrorResponse) => {
-          console.log(errorResponse);
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
           this.notify = true;
           this.profileImage = null;
@@ -290,7 +303,6 @@ export class UserComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.userService.deleteUser(username).subscribe(
         (response: CustomHttpResponse) => {
-          console.log(response)
           this.sendNotification(NotificationType.SUCCESS, response.message);
           this.getUsers(false);
           this.notify = true;

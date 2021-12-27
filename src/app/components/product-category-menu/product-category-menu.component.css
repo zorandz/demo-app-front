@@ -11,9 +11,8 @@ a {
 }
 
 .allround-container {
-    display: flex;
-    flex-flow: column wrap;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
+    margin-right: 2rem;
 }
 
 .users-i-actuator-container {
@@ -57,4 +56,9 @@ a {
 .side-menu-ul li a {
     display: block;
     width: 100%; 
+}
+
+@media(max-width: 1000px) {
+    .allround-container {
+    }
 }

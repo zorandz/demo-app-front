@@ -28,8 +28,8 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css",
-              "src/assets/css/myStyles.css"
+              "src/styles.css"
+              
             ],
             "scripts": [
               "src/assets/js/scripts.js"

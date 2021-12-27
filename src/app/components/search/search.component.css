@@ -32,7 +32,7 @@
   
   .search-form {
       display: flex;
-      margin-left: 3rem;
+      margin-left: 2rem;
   }
 
   .bn32 {
@@ -48,6 +48,33 @@
 
   .b32:hover {
     background-color: yellow;
+  }
+
+  @media(max-width: 769px) {
+    .search-form {
+      margin-left: -2rem;
+    }
+
+    .bn30 {
+    padding: 0.5rem 1rem;
+    border: 1rem;
+    cursor: pointer;
+    outline: none;
+    font-size: 0.8rem;
+    color: black;
+    }
+
+    .search-btn {
+    font-size: 1.5rem;
+    background-color: rgb(63, 63, 11);
+    border-radius: 4px 4px 4px 4px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    outline: none;
+    border: 1rem;
+    }
   }
   
   

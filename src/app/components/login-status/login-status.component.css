@@ -13,6 +13,11 @@
     transition: opacity 170ms ease-in-out, transform 170ms ease-in-out;
 }
 
+.menu-item:hover {
+    background-color: black;
+    color: yellow;
+}
+
 .items-container {
     width: inherit;
     position:absolute;
@@ -51,12 +56,12 @@
     font-size: 2rem;
     background-color: rgb(63, 63, 11);
     border-radius: 4px 4px 4px 4px;
-    padding: 0.5rem 1.5rem;
+    padding: 0.58rem 1.5rem;
     cursor: pointer;
     color: white;
     position: absolute;
-    top: -0.1rem;
-    right: 0rem;
+    top: 0.8rem;
+    right: 15rem;
     border: 1rem;
     width: inherit;
 }
@@ -65,11 +70,80 @@
 .login-status-container {
     display: flex;
     height: 4rem;
-    position: absolute;
-    top: 1rem;
-    right: 15rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .login-button:hover {
     text-decoration: none;
+}
+
+
+@media (min--moz-device-pixel-ratio:0) and (max-width: 3000px) {
+    .welcome-login-dropdown {
+        display: flex;
+        flex-direction: column;
+        font-size: 2rem;
+        background-color: rgb(63, 63, 11);
+        border-radius: 4px 4px 4px 4px;
+        padding: 0.5rem 3.9rem 0.5rem 1.5rem;
+        cursor: pointer;
+        color: white;
+        position: relative;
+        text-align: right;
+        border: 1rem;
+        width: 20rem;
+    }
+}
+
+@media(max-width: 769px) {
+
+    .login-btn {
+        right: 6rem;
+        top: 1.3rem;
+        font-size: 1.4rem;
+    }
+
+    .login-status-container {
+        right: 7rem;
+        font-size: 1.3rem;
+    }
+
+    .welcome-login-dropdown-tablet {
+    display: flex;
+    flex-direction: column;
+    font-size: 3rem;
+    background-color: rgb(63, 63, 11);
+    border-radius: 4px 4px 4px 4px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    text-align: right;
+    border: 1rem;
+    width: 4rem;
+    margin-right: 2rem;
+    }
+
+    .welcome-login-dropdown-tablet i {
+        max-width: 1rem;
+        font-weight: 300 !important;
+        margin-left: -8px;
+    }
+
+    .menu-item {
+    width: 20rem;
+    font-size: 1.85rem;
+    background-color: rgb(63, 63, 11);
+    border-radius: 4px 4px 4px 4px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    color: white;
+    top: calc(100% + 1rem);
+
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .8);
+    transform: translateY(-10px);
+    transition: opacity 170ms ease-in-out, transform 170ms ease-in-out;
+    }
+    
 }

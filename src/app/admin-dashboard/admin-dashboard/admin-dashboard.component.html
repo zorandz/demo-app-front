@@ -1,38 +1,45 @@
 <div class="actuator-container">
-  <nav class=" my-navbar" style="background-color: #d3dedf;">
-    <p class="title">System Monitoring Dashboard</p>
+  <nav class="actutor-nav">
+    <p *ngIf="!isMobile" class="title">System Monitoring Dashboard</p>
     
   
     <div class="system-info-items" id="nav">
-      <ul class="">
-        <li class="">
+      <ul class="" style="list-style: none;">
+        <li class="system">
           <span [ngClass]="{'text-danger': systemHealth?.status !=='UP'}"><i class="fa fa-server"></i> System: {{systemHealth?.status}}</span>&nbsp;&nbsp;
           <span [ngClass]="{'text-danger': systemHealth?.components.db.status !=='UP'}"><i class="fa fa-database"></i> DB: {{systemHealth?.components.db.details.database}} - {{systemHealth?.components.db.status}}</span>&nbsp;
           <span [ngClass]="{'text-danger': !systemHealth?.components.diskSpace.details.free}"><i class="fa fa-hdd-o"></i> Disk Space: {{systemHealth?.components.diskSpace.details.free}}</span>&nbsp;&nbsp;
-          <span [ngClass]="{'text-danger': systemCpu?.measurements[0].value < 2}"><i class="fa fa-microchip"></i> Processors: {{systemCpu?.measurements[0].value}}</span>&nbsp;&nbsp;
-          <span><i class="fa fa-clock-o"></i> Up Time: {{processUpTime}}</span>
+          <span *ngIf="!isRefreshBtnChanged" [ngClass]="{'text-danger': systemCpu?.measurements[0].value < 2}"><i class="fa fa-microchip"></i> Processors: {{systemCpu?.measurements[0].value}}</span>&nbsp;&nbsp;
+          <span *ngIf="!isRefreshBtnChanged"><i class="fa fa-clock-o up-time"></i> Up Time: {{processUpTime}}</span>
         </li>
       </ul>
     </div>
-    <div class="refresh-btn">
+
+      <button *ngIf="isRefreshBtnChanged" (click)="onRefreshData()" class="black-btn new-refresh-btn">
+      Refresh
+      </button>
+
+    <div *ngIf="!isRefreshBtnChanged" class="refresh-btn d-non">
       <button (click)="onRefreshData()" class="addToCart-button refresh-btn">
       Refresh Data
       </button>
     </div>
-</nav>
+  </nav>
   
   <div class="http-response-container">
-    <div class="row">
-          <div class="response-card">
-              <div class="response-info-container">
-                <i class="fa fa-check-circle-o response-icon"></i>
-                <h6 class="response">200 Response</h6>
-                <h2 class="response-number"><span>{{http200Traces?.length}}</span></h2>
-              </div>
-              <div class="last-updated-container">
-                <p class="">Updated:<span *ngIf="http200Traces?.length > 0" class="f-right">{{http200Traces[0]?.timestamp | date:'short'}}</span></p>
-              </div>
+    <div class="">
+      <div class="response-cards-container">
+
+        <div class="response-card">
+          <div class="response-info-container">
+            <i class="fa fa-check-circle-o response-icon"></i>
+            <h6 class="response">200 Response</h6>
+            <h2 class="response-number"><span>{{http200Traces?.length}}</span></h2>
           </div>
+          <div class="last-updated-container">
+            <p class="">Updated:<span *ngIf="http200Traces?.length > 0" class="f-right">{{http200Traces[0]?.timestamp | date:'short'}}</span></p>
+          </div>
+        </div>
 
           <div class="response-card">
             <div class="response-info-container">
@@ -54,37 +61,39 @@
           <div class="last-updated-container">
             <p class="">Updated:<span *ngIf="http400Traces?.length > 0" class="f-right">{{http400Traces[0]?.timestamp | date:'short'}}</span></p>
           </div>
-      </div>
-
-      <div class="response-card">
-        <div class="response-info-container">
-          <i class="fa fa-bug response-icon"></i>
-          <h6 class="response">500 Response</h6>
-          <h2 class="response-number-red"><span>{{http500Traces?.length}}</span></h2>
         </div>
-        <div class="last-updated-container">
-          <p class="">Updated:<span *ngIf="http500Traces?.length > 0" class="f-right">{{http500Traces[0]?.timestamp | date:'short'}}</span></p>
-        </div>
-    </div>
 
-    <div class="canvas-container">
-      <div class="col-sm-6 col-md-6 col-lg-6"> HTTP RESPONSE
-        <canvas id="barChart" style="display: block;"></canvas>
+        <div class="response-card">
+          <div class="response-info-container">
+            <i class="fa fa-bug response-icon"></i>
+            <h6 class="response">500 Response</h6>
+            <h2 class="response-number-red"><span>{{http500Traces?.length}}</span></h2>
+          </div>
+          <div class="last-updated-container">
+            <p class="">Updated:<span *ngIf="http500Traces?.length > 0" class="f-right">{{http500Traces[0]?.timestamp | date:'short'}}</span></p>
+          </div>
+        </div>
+
       </div>
-  
-      <div class="col-sm-6 col-md-6 col-lg-6">HTTP RESPONSE
-        <canvas id="pieChart" style="display: block;">
-        </canvas>
-     </div>
-    </div>
+          
+
+        <div class="canvas-container">
+          <div class="bar-chart"> HTTP RESPONSE
+            <canvas id="barChart"></canvas>
+          </div>
+      
+          <div class="pie-chart">HTTP RESPONSE
+            <canvas id="pieChart"></canvas>
+          </div>
+        </div>
   
      
   
      <hr>
   
-     <div class="col-sm-6 col-md-6 col-lg-12" style="margin-top: 50px;">
+     <div class="http-traces-container">
       <h5 class="pull-left">HTTP Traces</h5>
-      <button type="button" (click)="exportTableToExcel()" class="addToCart-button pull-right" style="margin-bottom: 10px;"> -->
+      <button type="button" (click)="exportTableToExcel()" class="black-btn pull-right" style="margin-bottom: 10px;"> -->
         <i class="fa fa-external-link" aria-hidden="true"></i>
         export to Excel</button>
       <table class="table table-hover text-center" id="httptrace-table">
@@ -115,7 +124,7 @@
             </td>
             <td (click)="onSelectTrace(trace)">{{trace?.request.uri}}</td>
             <td>
-              <button (click)="onSelectTrace(trace)" style="height: 2.7" class="btn btn-outline-info addToCart-button"><i class="fa fa-eye"></i></button>
+              <button (click)="onSelectTrace(trace)" style="height: 2.7" class="black-btn"><i class="fa fa-eye"></i></button>
             </td>
           </tr>
         </tbody>

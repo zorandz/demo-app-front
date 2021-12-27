@@ -31,6 +31,9 @@ export class CheckoutComponent implements OnInit {
 
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
+
+  storage: Storage = sessionStorage;
+
     
   constructor(private formBuilder: FormBuilder,
               private reactiveFormService: ReactiveFormService,
@@ -239,13 +242,15 @@ export class CheckoutComponent implements OnInit {
 
           // reset cart
           this.resetCart();
-
+          this.storage.removeItem('cartItems');
         },
         error: err => {
           alert(`There was an error: ${err.message}`);
         }
       }
     );
+
+    
 
   }
 

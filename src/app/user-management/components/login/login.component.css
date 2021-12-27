@@ -1,22 +1,41 @@
-Coded with love by Mutiullah Samim
-body,
-html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #60a3bc !important;
+.login-container {
+  margin-top: 5rem;
+  height: 20rem;
 }
+
+.login-title {
+  position: absolute;
+  top: 0;
+  transform: translate(140%, 100%);
+
+}
+
+.buttons {
+  margin-top: 2rem;
+}
+
+.firstname-icon {
+  padding-left: .15rem !important;
+
+}
+
+.input-group-append i {
+  background-color: black;
+  color: yellow;
+  text-align: center;
+}
+
+.login-btn {
+  padding-right: 1.3rem;
+}
+
 .user_card {
-    height: 500px;
-    width: 600px;
-    margin-top: auto;
-    margin-bottom: auto;
-    background: #afbfd8;
+    background: yellow;
     position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 10px;
+    padding: 2rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0a, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -39,8 +58,19 @@ html {
     border-radius: 50%;
     border: 2px solid white;
 }
+
+.sign-up {
+  padding: 0.5rem 1.3rem !important  
+  
+}
+
+.or {
+  font-weight: 900;
+  margin: 0.8rem 1rem 0 1.3rem;
+}
+
 .form_container {
-    margin-top: 100px;
+  margin-top: 5rem;
 }
 .login_btn {
     width: 100%;
@@ -68,11 +98,6 @@ html {
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
     background-color: #1B4F72!important;
 }
-
-.sign-up-text {
-    margin-left: .5rem;
-}
-
 
 /* new login */
 
@@ -178,3 +203,10 @@ html {
     margin-bottom: 6rem;
     width: 100%;
   }
+
+  
+span.input-group-text {
+  background-color: black !important;
+  min-width: 2.7rem;
+  text-align: center;
+}

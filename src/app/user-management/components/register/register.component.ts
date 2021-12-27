@@ -9,7 +9,7 @@ import { NotificationType } from '../../../common/enum/notification-type';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
+  templateUrl: './register.component-2.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit, OnDestroy {

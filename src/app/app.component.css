@@ -1,5 +1,6 @@
 header {
     display: flex;
+    flex-direction: row;
     align-items: center;
     height: 6rem;
     background-color: black;
@@ -10,27 +11,34 @@ header {
     z-index: 40;
 }
 
+section {
+    width: 100%;
+}
+
 .header-section {
     overflow: visible;
 
 }
 
 .search-input {
-    flex: 3 1 20rem;
+    flex: 3 1 10rem;
 }
 
 .main-section {
     width: 100%;
     height: 100%;
-    overflow: visible;
+ /*   margin-left: 3vw; */
+}
+
+.side-menu {
 }
 
 .main-section-container {
     display: flex;
     flex-direction: column;
-    width: 89.3%;
+    width: 100%;
     height: 100%;
-    margin-left: 4.7vw;
+    justify-content: center;
 }
 
 .main-section-portfolio {
@@ -42,9 +50,33 @@ header {
     padding-right: 1rem;
     right: 12rem;
     top: 2rem;
+    margin-right: 4rem;
     font-size: 1.6rem;
 }
 
-/* SIDE MENU HOOKUP */
+@media(max-width: 769px) {
 
+    .login-status {
+        order: 1;
+    }
 
+    .search-input {
+        order: 2;
+        width: 5rem;
+    }
+
+    .cart-status {
+        order: 2;
+        margin-right: 0rem;
+    }
+
+    .main-section {
+    }
+}
+
+@media(max-width: 480px) {
+    .search-input {
+        margin-left: -1rem;
+        margin-top: 0.1rem;
+    }
+}

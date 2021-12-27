@@ -6,8 +6,8 @@
           routerLink="category/{{ productCategory.id }}"
           routerLinkActive="active-link"
           (click)="onClick(productCategory.categoryName!)"
-          class="side-link"
-        >
+          class="side-link">
+
           <i class="fa fa-gift"></i>
           <strong class="the-links">
             {{ productCategory.categoryName }}
@@ -16,7 +16,7 @@
       </li>
     </ul>
   </div>
-
+<!--
   <div *ngIf="isHeAuthenticated && isHeAuthorized" class="users-i-actuator-container">
     <div class="users features">
       <a routerLinkActive="active-link" routerLink="/user/management" class="features-anchor">User Management</a>
@@ -30,4 +30,5 @@
       <a routerLinkActive="active-link" routerLink="/actuator" class="features-anchor">Actuator</a>
     </div>
   </div>
+  -->
 </div>

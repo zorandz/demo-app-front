@@ -6,6 +6,7 @@ import { User } from '../common/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Role } from '../common/enum/role';
+import { User2 } from '../common/user2';
 
 
 @Injectable({providedIn: 'root'})
@@ -20,8 +21,8 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private route: Router) {}
 
-  public login(user: User): Observable<HttpResponse<User>> {
-    return this.http.post<User>(`${this.host}/user/login`, user, { observe: 'response' });
+  public login(user: User): Observable<HttpResponse<User2>> {
+    return this.http.post<User2>(`${this.host}/user/login`, user, { observe: 'response' });
   }
 
   public register(user: User): Observable<User> {

@@ -1,10 +1,10 @@
 .checkout-container {
     width: 100%;
     display: flex;
+    justify-content: center;
 }
 
 .checkout-form-container {
-    margin-left: 30vw;
     background-color: black;
     color: yellow;
     min-width: 300px;

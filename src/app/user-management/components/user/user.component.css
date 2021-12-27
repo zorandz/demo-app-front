@@ -1,3 +1,11 @@
+.container {
+    margin-top: 1rem;
+    min-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .orders-container {
     display: flex;
     flex-flow: column;
@@ -11,6 +19,10 @@
     text-align: center;
 }
 
+.order-id {
+    margin-bottom: 2rem;
+}
+
 .order-item span:not(:first-child) {
     margin-left: 1rem;
 }
@@ -20,7 +32,7 @@
 }
 
 .order-item span {
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
 }
 
 .order-product-img  {
@@ -74,3 +86,92 @@ nav a:not(:first-child) {
     outline:none;
 }
 
+.new-user-btn {
+    padding-right: 1rem;
+}
+
+.reset-pass-btn {
+    padding: 1.5rem 2rem 1.5rem 1rem;
+}
+
+.fa-fw {
+    margin: 0 0.7rem;
+}
+
+.fa-fw + span {
+    padding-right: 0.7rem;
+}
+
+.save-changes-btn {
+    padding: 1rem 1.2rem 1rem 0.7rem;
+}
+
+.active-badge {
+    width: 15px;
+    height: 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid black;
+    color: rgb(76, 204, 76);
+}
+
+.tb-row:nth-child(even) {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.tb-row:nth-child(odd) {
+    border-left: 1px solid yellow;
+    border-right: 1px solid yellow;
+}
+
+.users-nav {
+    width: 90%;
+    margin-top: -2rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: black;
+    color: rgb(255, 255, 142);
+    padding-top: 1rem;
+    font-size: 1.2rem;
+    position: relative;
+    align-self: center;
+
+}
+
+
+.save-btn:hover {
+    background-color: #E9E3C3;
+    color: black;
+    
+  }
+  
+  .save-btn:active {
+    animation: disappear-btn 1s ease-out;
+  }
+  
+  
+  .save-btn {
+    background-color: black;
+    color: #ffff00;
+    font-size: 1rem;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    padding: 0.4rem 0.5rem;
+    white-space: nowrap;
+    outline: rgb(180, 180, 90) solid 1px;
+    border: none;
+  }
+
+
+@media(max-width: 991px) {
+    .new-user-btn {
+        max-height: 30px;
+        margin-top: 0.5rem;
+    
+    }
+}

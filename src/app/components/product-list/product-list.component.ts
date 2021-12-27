@@ -34,6 +34,7 @@ export class ProductListComponent implements OnInit {
 
   previousKeyword!: string;
   showButton: boolean;
+  notificationTimeout: any;
 
   constructor(private productService: ProductService, 
               private route: ActivatedRoute,
@@ -70,18 +71,18 @@ export class ProductListComponent implements OnInit {
       errorRes => {
       }
     )
-  //  this.refresh();
+   // this.refresh();
   }
 
   private sendNotification(notificationType: NotificationType, message: string): void {
     if (message) {
       this.notificationService.notify(notificationType, message);
-      setTimeout(()=>{                           
+      this.notificationTimeout = setTimeout(()=>{                           
         this.notify = false;
    }, 4000);
     } else {
       this.notificationService.notify(notificationType, 'An error occurred. Please try again.');
-      setTimeout(()=>{                           
+      this.notificationTimeout = setTimeout(()=>{                           
         this.notify = false;
    }, 4000);
     }
@@ -160,6 +161,11 @@ export class ProductListComponent implements OnInit {
     const theCartItem = new CartItem(product);
 
     this.cartService.addToCart(theCartItem);
+    if (!this.notify) {
+      clearTimeout(this.notificationTimeout);
+    }
+    this.sendNotification(NotificationType.SUCCESS, `${product.name} added to cart.`);
+    this.notify = true;
   }
 
   public get isAdmin(): boolean {

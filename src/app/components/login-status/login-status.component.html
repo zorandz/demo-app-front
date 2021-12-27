@@ -1,18 +1,37 @@
-<div class="login-status-container">
+<div class="login-status-container" *ngIf="!isMobile">
   <button *ngIf="authenticated" (click)="dropdown('dropIt')" class="welcome-login-dropdown">Welcome {{ firstName }}<i class="fas fa-user"></i>
     <div class="items-container" *ngIf="dropdownString == 'dropIt'">
       <div routerLink="/user/management" class="menu-item" *ngIf="dropdownString == 'dropIt' && isHeAuthorized">User Management</div>
       <div routerLink="/add-product-form" class="menu-item" *ngIf="dropdownString == 'dropIt' && isHeAuthorized">Add Product</div>
       <div routerLink="/actuator" class="menu-item" *ngIf="dropdownString == 'dropIt' && isHeAuthorized">Actuator</div>
       <div *ngIf="authenticated && dropdownString == 'dropIt'" class="menu-item" (click)="onLogout()">Logout</div>
-      <div routerLink="/about-owner" *ngIf="authenticated && dropdownString == 'dropIt'" class="menu-item">About Site Owner</div>
+   <!--   <div routerLink="/about-owner" *ngIf="authenticated && dropdownString == 'dropIt'" class="menu-item">About Site Owner</div>-->
+    </div>
+  
+  </button> 
+  
+  <div *ngIf="!authenticated" class="">
+    <a routerLink="/login" class="login-btn">Sign In</a>
+  </div>
+  
+</div>
+
+<div class="login-status-container" *ngIf="isMobile">
+  <button *ngIf="authenticated" (click)="dropdown('dropIt')" class="welcome-login-dropdown-tablet"><i class="fas fa-bars"></i>
+
+
+    <div class="items-container" *ngIf="dropdownString == 'dropIt'">
+      <div routerLink="/user/management" class="menu-item" *ngIf="dropdownString == 'dropIt' && isHeAuthorized">User Management</div>
+      <div routerLink="/add-product-form" class="menu-item" *ngIf="dropdownString == 'dropIt' && isHeAuthorized">Add Product</div>
+      <div routerLink="/actuator" class="menu-item" *ngIf="dropdownString == 'dropIt' && isHeAuthorized">Actuator</div>
+      <div *ngIf="authenticated && dropdownString == 'dropIt'" class="menu-item" (click)="onLogout()">Logout</div>
+  <!--    <div routerLink="/about-owner" *ngIf="authenticated && dropdownString == 'dropIt'" class="menu-item">About Site Owner</div>-->
     </div>
   
   </button> 
   
   <div *ngIf="!authenticated">
-    <a routerLink="/login" class="login-btn">Login</a>
+    <a routerLink="/login" class="login-btn">Sign In</a>
   </div>
   
 </div>
-

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SystemHealth } from '../interfaces/system-health';
@@ -11,7 +11,7 @@ import { ChartType } from '../../common/enum/chart-type';
 templateUrl: './admin-dashboard.component.html', 
 styleUrls: ['./admin-dashboard.component.css'] })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
   public traceList: any[] = [];
   public selectedTrace: any;
   public systemHealth: SystemHealth;
@@ -25,6 +25,8 @@ export class DashboardComponent implements OnInit {
   private timestamp: number;
   public pageSize = 10;
   public page = 1;
+  isMobile: boolean;
+  isRefreshBtnChanged: boolean;
 
 
 
@@ -36,6 +38,49 @@ export class DashboardComponent implements OnInit {
     this.getCpuUsage();
     this.getProcessUpTime(true);
   //  this.getCurrentLocation();
+/*
+  this.isMobile = this.getIsMobile();
+  this.isRefreshBtnChanged = this.getResizeForRefreshBtn();
+    window.onresize = () => {
+      this.isMobile = this.getIsMobile();
+      this.isRefreshBtnChanged = this.getResizeForRefreshBtn();
+    };
+    */
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+  if(event.target.innerWidth < 1292) {
+    this.isMobile = true;
+  } else {
+    this.isMobile = false;
+  }
+
+  if (event.target.innerWidth < 1000) {
+    this.isRefreshBtnChanged = true;
+  } else {
+    this.isRefreshBtnChanged = false;
+  }
+}
+
+  getIsMobile(): boolean {
+    const w = document.documentElement.clientWidth;
+    const breakpoint = 1292;
+    if (w < breakpoint) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getResizeForRefreshBtn(): boolean {
+    const w = document.documentElement.clientWidth;
+    const breakpoint = 1000;
+    if (w < breakpoint) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public onSelectTrace(trace: any): void {
@@ -245,5 +290,13 @@ export class DashboardComponent implements OnInit {
    }
 
   
-
+   ngAfterViewInit(): void {/*
+    this.isMobile = this.getIsMobile();
+    this.isRefreshBtnChanged = this.getResizeForRefreshBtn();
+      window.onresize = () => {
+        this.isMobile = this.getIsMobile();
+        this.isRefreshBtnChanged = this.getResizeForRefreshBtn();
+      };
+      */
+   }
 }
