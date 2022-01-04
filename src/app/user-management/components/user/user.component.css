@@ -175,3 +175,25 @@ nav a:not(:first-child) {
     
     }
 }
+
+@media(max-width: 460px) {
+    .user-id {
+        display: none;
+    }
+}
+
+@media(max-width: 390px) and (min-width: 350px){
+    .container {
+        margin-left: -1.3rem;
+    }
+
+    #profile {
+        width: 106vw;
+    }
+}
+
+@media(max-width: 350px) {
+    .dont-show-username {
+        display: none;
+    }
+}

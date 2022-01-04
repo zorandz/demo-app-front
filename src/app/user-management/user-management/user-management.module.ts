@@ -33,7 +33,7 @@ const routes: Routes = [
     CommonModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes, { useHash: true}),
+    RouterModule.forRoot(routes),
     ReactiveFormsModule,
     NotificationModule,
   ],

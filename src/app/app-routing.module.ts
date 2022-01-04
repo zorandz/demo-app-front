@@ -20,6 +20,7 @@ import { SearchComponent } from './components/search/search.component';
 import { NotificationModule } from './notification.module';
 import { OwnerComponent } from './components/owner/owner.component';
 import { NotificationService } from './services/notification.service';
+import { AuthenticationGuard } from './guard/authentication.guard';
 
 const routes: Routes = [ 
   // { path: 'order-history', component: OrderHistoryComponent },
@@ -31,9 +32,9 @@ const routes: Routes = [
  { path: 'cart-details', component: CartDetailsComponent},
  { path: 'products/:id', component: ProductDetailsComponent},
  { path: 'search/:keyword', component: ProductListComponent },
- { path: 'actuator', component: DashboardComponent},
- //{ path: '', redirectTo: '/products', pathMatch: 'full' },
- { path: '', redirectTo: '/login', pathMatch: 'full' },
+ { path: 'actuator', component: DashboardComponent, canActivate: [AuthenticationGuard]},
+ { path: '', redirectTo: '/products', pathMatch: 'full' },
+ //{ path: '', redirectTo: '/login', pathMatch: 'full' },
  { path: 'add-product-form', component: AddProductComponent },
  { path: 'about-owner', component: OwnerComponent },
  //{ path: '**', redirectTo: '/login', pathMatch: 'full' }
@@ -54,7 +55,7 @@ const routes: Routes = [
     OwnerComponent
   ],
   imports: [
-    RouterModule.forRoot(routes, { useHash: true }), 
+    RouterModule.forRoot(routes), 
     CommonModule,
     NgbModule,
     HttpClientModule,

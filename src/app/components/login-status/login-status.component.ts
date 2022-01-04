@@ -11,7 +11,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginStatusComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  isHeAuthorized: boolean = false;
+  isHeAuthorized: boolean;
   authenticated: boolean;
   subscription: Subscription;
   firstName: string = localStorage.getItem("firstName")
@@ -28,7 +28,9 @@ export class LoginStatusComponent implements OnInit, AfterViewInit, OnDestroy {
   
   ngOnInit(): void {
     this.isAuthenticated();
-    this.isAuthorized();
+    if (this.authenticated) {
+      this.isAuthorized();
+    }
 
     this.isMobile = this.getIsMobile();
     window.onresize = () => {
@@ -48,7 +50,6 @@ export class LoginStatusComponent implements OnInit, AfterViewInit, OnDestroy {
 */
   isAuthorized() {
     this.isHeAuthorized = this.authService.isAuthorized(JSON.parse(localStorage.getItem('user')));
-    console.log(this.isAuthorized);
   }
 
   getIsMobile(): boolean {

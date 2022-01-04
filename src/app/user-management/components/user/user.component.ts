@@ -50,7 +50,7 @@ export class UserComponent implements OnInit, OnDestroy {
               private userService: UserService, private notificationService: NotificationService) {}
 
   ngOnInit(): void {
-    this.user = this.authenticationService.getUserFromLocalCache();
+      this.user = this.authenticationService.getUserFromLocalCache();
     this.getUsers(true);
 
     this.isTablet = this.getIsMobile();
@@ -130,6 +130,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.userService.addUsersToLocalCache(response);
           this.users = response;
           this.refreshing = false;
+
           if (showNotification) {
             this.sendNotification(NotificationType.SUCCESS, `${response.length} user(s) loaded successfully.`);
             setTimeout(() => {
@@ -145,6 +146,8 @@ export class UserComponent implements OnInit, OnDestroy {
     );
 
   }
+
+  
 
   public onSelectUser(selectedUser: User): void {
     this.selectedUser = selectedUser;
@@ -206,7 +209,8 @@ export class UserComponent implements OnInit, OnDestroy {
   public onUpdateCurrentUser(user: User): void {
     this.refreshing = true;
     this.currentUsername = this.authenticationService.getUserFromLocalCache().username;
-    const formData = this.userService.createUserFormDate(this.currentUsername, user, this.profileImage);
+    const formData = this.userService.createUserUpdateFormDate(this.currentUsername, user, this.profileImage, this.user);
+    //console.log(this.user)
     this.subscriptions.push(
       this.userService.updateUser(formData).subscribe(
         (response: User) => {

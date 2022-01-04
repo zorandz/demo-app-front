@@ -21,6 +21,7 @@ export class ProductCategoryMenuComponent implements OnInit, OnDestroy {
   subscription2: Subscription;
 
   constructor(private productService: ProductService, private authService: AuthenticationService) {
+    
     this.subscription = this.authService.isUserLogged.subscribe(data => {
       this.isHeAuthenticated = data;
     })
@@ -28,6 +29,7 @@ export class ProductCategoryMenuComponent implements OnInit, OnDestroy {
     this.subscription2 = this.authService.isUserAuthorized.subscribe(data => {
       this.isHeAuthorized = data;
       })
+    
    }
 
   ngOnInit(): void {

@@ -219,6 +219,10 @@ span {
   padding: 2rem;
 }
 
+.dont-show {
+  display: block;
+}
+
 
 @media(max-width: 800px) {
     
@@ -258,6 +262,10 @@ span {
 @media(max-width: 1250px) {
   .response-card {
     width: 20rem;
+  }
+
+  .dont-show {
+    display: none;
   }
 }
 
@@ -313,4 +321,15 @@ span {
   }
   
   
+}
+
+@media(max-width: 480px) {
+  .dont-show {
+    display: none;
+  }
+
+  .http-traces-container {
+    padding: 0;
+  }
+
 }

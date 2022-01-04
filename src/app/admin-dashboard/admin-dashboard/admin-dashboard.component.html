@@ -1,6 +1,6 @@
 <div class="actuator-container">
   <nav class="actutor-nav">
-    <p *ngIf="!isMobile" class="title">System Monitoring Dashboard</p>
+    <p *ngIf="!isMobile" class="title dont-show">System Monitoring Dashboard</p>
     
   
     <div class="system-info-items" id="nav">
@@ -9,8 +9,8 @@
           <span [ngClass]="{'text-danger': systemHealth?.status !=='UP'}"><i class="fa fa-server"></i> System: {{systemHealth?.status}}</span>&nbsp;&nbsp;
           <span [ngClass]="{'text-danger': systemHealth?.components.db.status !=='UP'}"><i class="fa fa-database"></i> DB: {{systemHealth?.components.db.details.database}} - {{systemHealth?.components.db.status}}</span>&nbsp;
           <span [ngClass]="{'text-danger': !systemHealth?.components.diskSpace.details.free}"><i class="fa fa-hdd-o"></i> Disk Space: {{systemHealth?.components.diskSpace.details.free}}</span>&nbsp;&nbsp;
-          <span *ngIf="!isRefreshBtnChanged" [ngClass]="{'text-danger': systemCpu?.measurements[0].value < 2}"><i class="fa fa-microchip"></i> Processors: {{systemCpu?.measurements[0].value}}</span>&nbsp;&nbsp;
-          <span *ngIf="!isRefreshBtnChanged"><i class="fa fa-clock-o up-time"></i> Up Time: {{processUpTime}}</span>
+          <span class="d-non"><span *ngIf="!isRefreshBtnChanged" [ngClass]="{'text-danger': systemCpu?.measurements[0].value < 2}"><i class="fa fa-microchip"></i> Processors: {{systemCpu?.measurements[0].value}}</span>&nbsp;&nbsp;</span>
+          <span class="d-non" *ngIf="!isRefreshBtnChanged"><i class="fa fa-clock-o up-time"></i> Up Time: {{processUpTime}}</span>
         </li>
       </ul>
     </div>
@@ -101,7 +101,7 @@
           <tr>
             <th>Time Stamp</th>
             <th>Method</th>
-            <th>Time Taken(ms)</th>
+            <th class="dont-show">Time Taken(ms)</th>
             <th>Status</th>
             <th>URI</th>
             <th>View</th>
@@ -171,8 +171,8 @@
                     <strong>Time Stamp:</strong>
                     {{selectedTrace?.timestamp | date:'medium'}}
                   </p>
-                  <p>
-                    <strong>Time Taken(ms):</strong>
+                  <p class="dont-show">
+                    <strong class="dont-show">Time Taken(ms):</strong>
                     {{selectedTrace?.timeTaken}}
                   </p>
                   <p>

@@ -48,7 +48,7 @@ export class ProductListComponent implements OnInit {
       this.listProducts();
     })
 
-    this.isLogged();
+   // this.isLogged();
   }
 
   updatePageSize(value: number) {

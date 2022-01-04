@@ -48,13 +48,12 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.authService.isUserLogged.next(true);
           this.sendNotification(NotificationType.SUCCESS, "You successfully logged in!");
           this.notify = true;
-          this.router.navigateByUrl("/products");
           this.refresh();
         },
         (errorResponse: HttpErrorResponse) => {
-          this.sendErrorNotification(NotificationType.ERROR, errorResponse.error.message);
-          this.showLoading = false;
+          this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
           this.notify = true;
+          this.showLoading = false;
         }
       )
     );
@@ -73,6 +72,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.user.role = user2.role;
     this.user.userId = user2.userId;
     this.user.username = user2.username;
+    this.user.authorities = user2.authorities;
     return this.user;
   }
 
